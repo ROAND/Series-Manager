@@ -6,7 +6,7 @@ Created on Jul 13, 2013
 #-*- coding: utf-8 -*-
 import sys
 from PySide import QtGui
-from seriesmanagerUI import Ui_MainWindow
+from views.seriesmanagerUI import Ui_MainWindow
 
 class MainWindow(QtGui.QMainWindow):
     def __init__(self, parent=None): #Construtor da classe MainWindow que chama a classe Ui_MainWindow gerada pelo pyside-uic
