@@ -14,3 +14,4 @@ Run
 Requirements:
 - Beautiful Soup 4: http://www.crummy.com/software/BeautifulSoup/
 - Python 3.x: http://www.python.org/getit/
+- PySide 1.2
