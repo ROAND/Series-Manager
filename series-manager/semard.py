@@ -5,7 +5,7 @@ import socket
 from threading import Thread
 import PySide
 from PySide.QtCore import Signal, Slot, QObject
-from PySide.QtGui import QApplication, QMainWindow, QMessageBox, QPixmap
+from PySide.QtGui import QApplication, QMainWindow, QMessageBox, QPixmap, QIcon
 from views.main_ui_pyside import Ui_MainWindow
 from PySide.QtCore import Qt
 from bs4 import BeautifulSoup
@@ -153,6 +153,7 @@ class MainWindow(QMainWindow):
         self.com = Comunicate()
         self.com.sig.connect(self.message)
         self.ui.anime_list_widget.itemDoubleClicked.connect(self.show_episodes)
+        self.setWindowIcon(QIcon('animes.png'))
         Thread(target=self.load_url_items).start()
 
     @Slot(str)

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main.ui'
 #
-# Created: Mon Nov 25 08:21:04 2013
+# Created: Mon Nov 25 22:47:52 2013
 #      by: pyside-uic 0.2.14 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -13,6 +13,9 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(864, 630)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("../images/animes.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        MainWindow.setWindowIcon(icon)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtGui.QGridLayout(self.centralwidget)
@@ -65,6 +68,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2.addWidget(self.avaLabel)
         self.image_label = QtGui.QLabel(self.centralwidget)
         self.image_label.setBaseSize(QtCore.QSize(0, 0))
+        self.image_label.setText("")
         self.image_label.setScaledContents(True)
         self.image_label.setObjectName("image_label")
         self.horizontalLayout_2.addWidget(self.image_label)
@@ -112,13 +116,12 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "MainWindow", None, QtGui.QApplication.UnicodeUTF8))
+        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "Semard - Anime Version", None, QtGui.QApplication.UnicodeUTF8))
         self.loading_label.setText(QtGui.QApplication.translate("MainWindow", "Loading...", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("MainWindow", "Search:", None, QtGui.QApplication.UnicodeUTF8))
         self.show_button.setText(QtGui.QApplication.translate("MainWindow", "&Show Episodes", None, QtGui.QApplication.UnicodeUTF8))
         self.label.setText(QtGui.QApplication.translate("MainWindow", "Anime List:", None, QtGui.QApplication.UnicodeUTF8))
         self.avaLabel.setText(QtGui.QApplication.translate("MainWindow", "available.", None, QtGui.QApplication.UnicodeUTF8))
-        self.image_label.setText(QtGui.QApplication.translate("MainWindow", "IMAGE", None, QtGui.QApplication.UnicodeUTF8))
         self.label_4.setText(QtGui.QApplication.translate("MainWindow", "Episodes:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setText(QtGui.QApplication.translate("MainWindow", "Download Options:", None, QtGui.QApplication.UnicodeUTF8))
         self.download_button.setText(QtGui.QApplication.translate("MainWindow", "&Download", None, QtGui.QApplication.UnicodeUTF8))

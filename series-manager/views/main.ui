@@ -11,7 +11,11 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Semard - Anime Version</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../images/animes.png</normaloff>../images/animes.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -124,7 +128,7 @@
          </size>
         </property>
         <property name="text">
-         <string>IMAGE</string>
+         <string/>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
