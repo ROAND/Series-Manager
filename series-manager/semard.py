@@ -5,7 +5,7 @@ import socket
 from threading import Thread
 import PySide
 from PySide.QtCore import Signal, Slot, QObject
-from PySide.QtGui import QApplication, QMainWindow, QMessageBox, QPixmap, QIcon
+from PySide.QtGui import QApplication, QMainWindow, QMessageBox, QPixmap, QIcon, QFileDialog
 from views.main_ui_pyside import Ui_MainWindow
 from PySide.QtCore import Qt
 from bs4 import BeautifulSoup
@@ -206,20 +206,26 @@ class MainWindow(QMainWindow):
         name = self.ui.options_list_widget.currentItem().text()
         link = self.options[name]
         self.com.sig.emit('started')
-        urllib.request.urlretrieve(link, "%s%s%s.torrent" % (tempfile.gettempdir(), os.sep, name))
+        dialog = QFileDialog(self)
+        dialog.setFileMode(QFileDialog.Directory)
+        dialog.setOption(QFileDialog.ShowDirsOnly, True)
+        file_path = os.path.join(dialog.getExistingDirectory(),"%s.torrent" % name.strip())
+        urllib.request.urlretrieve(link, file_path)
         self.ui.loading_label.setVisible(False)
         msgBox = QMessageBox()
         msgBox.setWindowTitle('Torrent Download')
-        msgBox.setText('Downloaded file %s.torrent to your temp folder %s.' % (name, tempfile.gettempdir()))
+        msgBox.setText('Downloaded file %s.torrent to %s.' % (name, file_path))
         msgBox.setInformativeText('Do you want to start the download now?')
         msgBox.setStandardButtons(QMessageBox.No | QMessageBox.Yes)
         msgBox.setDefaultButton(QMessageBox.Yes)
         ret = msgBox.exec_()
         if ret == QMessageBox.Yes:
             if sys.platform in 'Win32':
-                os.startfile('%s%s%s.torrent' % (tempfile.gettempdir(), os.sep, name))
+                os.startfile(file_path)
             else:
-                subprocess.getoutput("kget %s%s%s.torrent" % (tempfile.gettempdir(), os.sep, name))
+                print(file_path)
+                subprocess.Popen(['ktorrent',file_path])
+        self.com.sig.emit('ended')
 
     def keyPressEvent(self, event):
         if isinstance(event, PySide.QtGui.QKeyEvent):
