@@ -22,6 +22,17 @@ socket.setdefaulttimeout(timeout)
 def open_url(url):
     return urllib2.urlopen(url)
 
+def get_file(file_name):
+    if getattr(sys, 'frozen', False):
+        #The application is frozen
+        datadir = os.path.join(os.path.dirname(sys.executable),"images")
+        print(datadir)
+    else:
+        #The application is not frozen
+        datadir = os.path.join(os.path.dirname(__file__), "images")
+        print(os.path.join(datadir, file_name))
+    return os.path.join(datadir, file_name)
+
 
 class AnimeList():
     def __init__(self, url):
@@ -158,7 +169,7 @@ class MainWindow(QMainWindow):
         self.com = Comunicate()
         self.com.sig.connect(self.message)
         self.ui.anime_list_widget.itemDoubleClicked.connect(self.show_episodes)
-        self.setWindowIcon(QIcon('images/animes.png'))
+        self.setWindowIcon(QIcon(get_file('animes.png')))
         Thread(target=self.load_url_items).start()
 
     @Slot(str)
@@ -198,14 +209,13 @@ class MainWindow(QMainWindow):
             file_name = img_link
             if file_name is not None:
                 file_name = img_link.replace('http://www.animetake.com/images/', '')
-            if os.path.exists('images' + os.sep + file_name):
-                self.ui.image_label.setPixmap('images' + os.sep + file_name)
+            if os.path.exists(get_file(file_name)):
+                self.ui.image_label.setPixmap(get_file(file_name))
             else:
                 #urllib.request.urlretrieve('http://www.animetake.com/images/%s' % file_name,
                 #                           'images' + os.sep + file_name)
-                urllib.urlretrieve('http://www.animetake.com/images/%s' % file_name,
-                                    'images' + os.sep + file_name)
-                self.ui.image_label.setPixmap('images' + os.sep + file_name)
+                urllib.urlretrieve('http://www.animetake.com/images/%s' % file_name,get_file(file_name))
+                self.ui.image_label.setPixmap(get_file(file_name))
             self.options = download.get_download_options()
             for name, link in self.options.items():
                 self.ui.options_list_widget.addItem(name)
