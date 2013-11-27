@@ -231,6 +231,7 @@ class MainWindow(QMainWindow):
         ret = msgBox.exec_()
         if ret == QMessageBox.Yes:
             if sys.platform in 'Win32':
+                print(file_path)
                 os.startfile(file_path)
             else:
                 print(file_path)
