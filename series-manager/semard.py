@@ -230,11 +230,9 @@ class MainWindow(QMainWindow):
         msgBox.setDefaultButton(QMessageBox.Yes)
         ret = msgBox.exec_()
         if ret == QMessageBox.Yes:
-            if sys.platform in 'Win32':
-                print(file_path)
+            if sys.platform in 'win32':
                 os.startfile(file_path)
             else:
-                print(file_path)
                 subprocess.Popen(['ktorrent',file_path])
         self.com.sig.emit('ended')
 
