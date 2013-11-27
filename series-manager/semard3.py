@@ -1,8 +1,6 @@
 import sys
 import os
-#import urllib.request
-import urllib2
-import urllib
+import urllib.request
 import socket
 from threading import Thread
 import PySide
@@ -19,13 +17,10 @@ import subprocess
 timeout = 10
 socket.setdefaulttimeout(timeout)
 
-def open_url(url):
-    return urllib2.urlopen(url)
-
 
 class AnimeList():
     def __init__(self, url):
-        page = open_url(url)
+        page = urllib.request.urlopen(url)
         page_string = page.read().decode('utf-8')
         soup = BeautifulSoup(page_string)
         links = soup.find_all("div")
@@ -69,7 +64,7 @@ class EpisodeList(Thread):
         self.start()
 
     def run(self):
-        page = open_url(self.url)
+        page = urllib.request.urlopen(self.url)
         page_string = page.read().decode('utf-8')
         soup = BeautifulSoup(page_string)
         links = soup.find_all("div")
@@ -119,7 +114,7 @@ class DownloadOptions(Thread):
         self.start()
 
     def run(self):
-        page = open_url(self.url)
+        page = urllib.request.urlopen(self.url)
         page_string = page.read().decode('utf-8')
         soup = BeautifulSoup(page_string)
         links = soup.find_all("li", {'class': 'tor'})
@@ -195,16 +190,12 @@ class MainWindow(QMainWindow):
             download = DownloadOptions(link)
             download.join()
             img_link = download.get_img_link()
-            file_name = img_link
-            if file_name is not None:
-                file_name = img_link.replace('http://www.animetake.com/images/', '')
+            file_name = img_link.replace('http://www.animetake.com/images/', '')
             if os.path.exists('images' + os.sep + file_name):
                 self.ui.image_label.setPixmap('images' + os.sep + file_name)
             else:
-                #urllib.request.urlretrieve('http://www.animetake.com/images/%s' % file_name,
-                #                           'images' + os.sep + file_name)
-                urllib.urlretrieve('http://www.animetake.com/images/%s' % file_name,
-                                    'images' + os.sep + file_name)
+                urllib.request.urlretrieve('http://www.animetake.com/images/%s' % file_name,
+                                           'images' + os.sep + file_name)
                 self.ui.image_label.setPixmap('images' + os.sep + file_name)
             self.options = download.get_download_options()
             for name, link in self.options.items():
@@ -219,8 +210,7 @@ class MainWindow(QMainWindow):
         dialog.setFileMode(QFileDialog.Directory)
         dialog.setOption(QFileDialog.ShowDirsOnly, True)
         file_path = os.path.join(dialog.getExistingDirectory(),"%s.torrent" % name.strip())
-        #urllib.request.urlretrieve(link, file_path)
-        urllib.urlretrieve(link, file_path)
+        urllib.request.urlretrieve(link, file_path)
         self.ui.loading_label.setVisible(False)
         msgBox = QMessageBox()
         msgBox.setWindowTitle('Torrent Download')
