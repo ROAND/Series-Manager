@@ -265,6 +265,7 @@
      <string>&amp;Ajuda</string>
     </property>
     <addaction name="action_About_Semard"/>
+    <addaction name="action_Contato"/>
    </widget>
    <addaction name="menu_About"/>
   </widget>
@@ -272,6 +273,11 @@
   <action name="action_About_Semard">
    <property name="text">
     <string>&amp;Sobre Semard</string>
+   </property>
+  </action>
+  <action name="action_Contato">
+   <property name="text">
+    <string>&amp;Contato</string>
    </property>
   </action>
  </widget>

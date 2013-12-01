@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main.ui'
 #
-# Created: Sun Dec  1 07:22:20 2013
+# Created: Sun Dec  1 07:29:26 2013
 #      by: pyside-uic 0.2.14 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -135,7 +135,10 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
         self.action_About_Semard = QtGui.QAction(MainWindow)
         self.action_About_Semard.setObjectName("action_About_Semard")
+        self.action_Contato = QtGui.QAction(MainWindow)
+        self.action_Contato.setObjectName("action_Contato")
         self.menu_About.addAction(self.action_About_Semard)
+        self.menu_About.addAction(self.action_Contato)
         self.menubar.addAction(self.menu_About.menuAction())
 
         self.retranslateUi(MainWindow)
@@ -159,4 +162,5 @@ class Ui_MainWindow(object):
         self.download_button.setText(QtGui.QApplication.translate("MainWindow", "&Abrir Link", None, QtGui.QApplication.UnicodeUTF8))
         self.menu_About.setTitle(QtGui.QApplication.translate("MainWindow", "&Ajuda", None, QtGui.QApplication.UnicodeUTF8))
         self.action_About_Semard.setText(QtGui.QApplication.translate("MainWindow", "&Sobre Semard", None, QtGui.QApplication.UnicodeUTF8))
+        self.action_Contato.setText(QtGui.QApplication.translate("MainWindow", "&Contato", None, QtGui.QApplication.UnicodeUTF8))
 

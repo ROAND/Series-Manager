@@ -8,7 +8,7 @@ import socket
 from threading import Thread
 import PySide
 from PySide.QtCore import Signal, Slot, QObject
-from PySide.QtGui import QApplication, QMainWindow, QMessageBox, QPixmap, QIcon, QFileDialog, QMovie, QSystemTrayIcon, QMenu
+from PySide.QtGui import QApplication, QMainWindow, QMessageBox, QPixmap, QIcon, QFileDialog, QMovie, QSystemTrayIcon, QMenu, QDialog
 from views.main_ui_pyside import Ui_MainWindow
 from PySide.QtCore import Qt
 from bs4 import BeautifulSoup
@@ -16,6 +16,9 @@ import bs4
 import subprocess
 import platform
 import webbrowser
+from email.mime.text import MIMEText
+import smtplib
+from views.feedback_ui_pyside import Ui_FeedbackDialog
 __version__ = 0.1
 
 timeout = 10
@@ -24,7 +27,6 @@ socket.setdefaulttimeout(timeout)
 
 def open_url(url):
     return urllib2.urlopen(url)
-
 
 def get_file(file_name):
     if getattr(sys, 'frozen', False):
@@ -36,7 +38,66 @@ def get_file(file_name):
         datadir = os.path.join(os.path.dirname(__file__), "images")
         #print(os.path.join(datadir, file_name))
     return os.path.join(datadir, file_name)
+  
+@Slot(str)
+def m_box_exec(message):
+    """Show message box (error)
+    @param message: message to show on QMessageBox"""
+    QMessageBox.critical(None, 'Error!', message, QMessageBox.Ok)
 
+
+@Slot(str)
+def m_box_exec_success(message):
+    """Show message box (sucess)
+    @param message: message to show on QMessageBox"""
+    QMessageBox.information(None, 'Sucess!', message, QMessageBox.Ok)
+
+  
+class Comunicate(QObject):
+    sig = Signal(str)
+    img = Signal(str)
+    op = Signal(str)
+    msg = Signal(str)
+    mBox = Signal(str)
+    mBoxEr = Signal(str)
+
+class EmailSender(Thread):
+
+    """Sends feedback mail"""
+
+    def __init__(self, nome, app_name, email, mensagem, com):
+        Thread.__init__(self)
+        self.mensagem = mensagem
+        self.app_name = app_name
+        self.email = email
+        self.nome = nome
+        self.com = com
+
+    def run(self):
+        """Calls self.send_mail()"""
+        self.send_mail(self.nome, self.app_name, self.email, self.mensagem)
+
+    def send_mail(self, nome, app_name, email, mensagem):
+        """Sends the email to suporte@roandigital"""
+        try:
+            sender = "contato@roandigital.com"
+            receivers = ['suporte@roandigital.com']
+            message = MIMEText(
+                mensagem + os.linesep + "Application: %s" % app_name)
+            message[
+                'Subject'] = "Feedback Semard - %s" % socket.gethostname()
+            message['From'] = " %s <%s>" % (nome, email)
+            message['To'] = "Suporte <suporte@roandigital.com>"
+
+            conn = smtplib.SMTP("smtp.roandigital.com:587")
+            conn.login("suporte@roandigital.com", "erros1234")
+            conn.sendmail(sender, receivers, message.as_string())
+            conn.quit()
+            self.com.mBox.emit(
+                u'O email foi enviado com sucesso. \n\nObrigado pelo seu feedback!')
+        except Exception as e:
+            self.com.mBoxEr.emit(
+                u'O email não foi enviado.\n\n Verifique sua conexão com a internet.')
 
 class AnimeList():
 
@@ -109,13 +170,6 @@ class EpisodeList():
         return self.sinopse
 
 
-class Comunicate(QObject):
-    sig = Signal(str)
-    img = Signal(str)
-    op = Signal(str)
-    msg = Signal(str)
-
-
 class SystemTrayIcon(QSystemTrayIcon):
 
     def __init__(self, icon, com, parent=None):
@@ -139,7 +193,28 @@ class SystemTrayIcon(QSystemTrayIcon):
 
     def close_event(self):
         sys.exit()
+        
+        
+class Feedback(QDialog):
 
+    """Send feedback"""
+
+    def __init__(self, com):
+        super(Feedback, self).__init__()
+        self.ui = Ui_FeedbackDialog()
+        self.ui.setupUi(self)
+        self.ui.sendButton.clicked.connect(self.send_mail)
+        self.com = com
+        self.com.mBox.connect(m_box_exec_success)
+        self.com.mBoxEr.connect(m_box_exec)
+
+    def send_mail(self):
+        """Calls EmailSender to send the feedback"""
+        mail = EmailSender(self.ui.nameEdit.text(), 'Semard',
+                           self.ui.emailEdit.text(), self.ui.messageEdit.toPlainText(), self.com)
+        mail.start()
+        mail.join()
+        self.close()
 
 class MainWindow(QMainWindow):
 
@@ -171,6 +246,11 @@ class MainWindow(QMainWindow):
             QIcon(get_file('animes.png')), self.com, self)
         self.com.op.connect(self.show_semard)
         self.ui.action_About_Semard.activated.connect(self.about_semard)
+        self.ui.action_Contato.activated.connect(self.show_feedback)
+        
+    def show_feedback(self):
+	feed = Feedback(self.com)
+        feed.exec_()
 
     def about_semard(self):
         about = QMessageBox.about(self, "About Semard",
