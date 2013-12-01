@@ -15,6 +15,7 @@ from bs4 import BeautifulSoup
 import bs4
 import subprocess
 import platform
+import webbrowser
 __version__ = 0.1
 
 timeout = 10
@@ -127,6 +128,7 @@ class SystemTrayIcon(QSystemTrayIcon):
         self.activated.connect(self.tray_activated)
         self.setContextMenu(menu)
         self.com = com
+        self.show()
 
     def show_action(self):
         self.com.op.emit('open')
@@ -174,9 +176,9 @@ class MainWindow(QMainWindow):
         about = QMessageBox.about(self, "About Semard",
         """<b>Semard</b> v%s
         <p><b>Copyright (C) 2013</b> Ronnie Andrew.</p>
-        <p>All rights reserved in accordance with GPL v3 or later - NO WARRANTIES!</p>
-        <p><b>Official Website:</b> <a href='https://github.com/ROAND/Series-Manager'>GitHub</a></p>
-        <p><b>Platform: </b>%s</p>
+        <p>Todos os direitos reservados de acordo com a licença GNU GPL v3 ou posterior - SEM GARANTIA!</p>
+        <p><b>Website Oficial:</b> <a href='https://github.com/ROAND/Series-Manager'>GitHub</a></p>
+        <p><b>Plataforma: </b>%s</p>
           """ % (__version__, platform.system()))
 
     def show_semard(self, message):
@@ -184,7 +186,6 @@ class MainWindow(QMainWindow):
 
     def closeEvent(self, event):
         self.hide()
-        self.tray.show()
         self.tray.showMessage(u'Executando', u'Semard ainda está em execução')
         event.ignore()
 
@@ -230,27 +231,22 @@ class MainWindow(QMainWindow):
 
     def download(self):
         #name = self.ui.options_list_widget.currentItem().text()
-        link = self.ui.options_list_widget.currentItem.text()
+        link = self.ui.options_list_widget.currentItem().text()
         self.com.sig.emit('started')
-        dialog = QFileDialog(self)
-        dialog.setFileMode(QFileDialog.Directory)
-        dialog.setOption(QFileDialog.ShowDirsOnly, True)
-        file_path = os.path.join(
-            dialog.getExistingDirectory(), "%s.torrent" % name.strip())
-        urllib.urlretrieve(link, file_path)
-        self.ui.loading_label.hide()
         msgBox = QMessageBox()
-        msgBox.setWindowTitle('Torrent Download')
-        msgBox.setText('Downloaded file %s.torrent to %s.' % (name, file_path))
-        msgBox.setInformativeText('Do you want to start the download now?')
+        msgBox.setWindowTitle(u'Informação')
+        msgBox.setText(u'Browser padrão')
+        msgBox.setInformativeText(u'Você deseja abrir este link com o seu browser padrão?')
         msgBox.setStandardButtons(QMessageBox.No | QMessageBox.Yes)
         msgBox.setDefaultButton(QMessageBox.Yes)
         ret = msgBox.exec_()
         if ret == QMessageBox.Yes:
             if sys.platform in 'win32':
-                os.startfile(file_path)
+                webbrowser.open(link)
             else:
-                subprocess.Popen(['ktorrent', file_path])
+                webbrowser.open(link)
+                #subprocess.Popen(['ktorrent', file_path])
+                pass
         self.com.sig.emit('ended')
 
     def keyPressEvent(self, event):
@@ -291,7 +287,6 @@ class MainWindow(QMainWindow):
         file_name = img_link
         if os.path.exists(get_file(file_name)):
             self.com.img.emit(get_file(file_name))
-            print(get_file(file_name))
             # self.ui.image_label.setPixmap(QPixmap(get_file(file_name)))
         else:
             if img_link is not None:
@@ -301,14 +296,18 @@ class MainWindow(QMainWindow):
                     'http://www.anbient.net/sites/default/files/imagecache/242x0/imagens/poster/%s' % file_name,
                     get_file(file_name))
                 self.com.img.emit(get_file(file_name))
-                print(get_file(file_name))
                 # self.ui.image_label.setPixmap(QPixmap(get_file(file_name)))
 
         self.ui.label_sinopse.setText(self.episodes.get_sinopse().strip())
-
-        for name, episode in reversed(sorted(self.episode_list.items())):
-            name, links = episode.get_attrs()
-            self.ui.res_list_widget.addItem(name)
+        try:
+            for name in reversed(sorted(self.episode_list.keys(), key=int)):
+                episode = self.episode_list[name]
+                name, links = episode.get_attrs()
+                self.ui.res_list_widget.addItem(name)
+        except:
+            for name, episode in reversed(sorted(self.episode_list.items())):
+                name, links = episode.get_attrs()
+                self.ui.res_list_widget.addItem(name)
         self.com.sig.emit('ended')
 
     def show_episodes(self):

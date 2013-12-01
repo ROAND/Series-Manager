@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main.ui'
 #
-# Created: Sun Dec  1 05:22:16 2013
+# Created: Sun Dec  1 07:22:20 2013
 #      by: pyside-uic 0.2.14 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -12,7 +12,7 @@ from PySide import QtCore, QtGui
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(914, 588)
+        MainWindow.resize(896, 603)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("../../../../.designer/images/animes.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
@@ -42,6 +42,7 @@ class Ui_MainWindow(object):
         self.anime_list_widget.setObjectName("anime_list_widget")
         self.horizontalLayout_8.addWidget(self.anime_list_widget)
         self.image_label = QtGui.QLabel(self.centralwidget)
+        self.image_label.setMinimumSize(QtCore.QSize(0, 245))
         self.image_label.setMaximumSize(QtCore.QSize(185, 245))
         self.image_label.setBaseSize(QtCore.QSize(0, 0))
         self.image_label.setText("")
@@ -92,10 +93,13 @@ class Ui_MainWindow(object):
         self.horizontalLayout_6 = QtGui.QHBoxLayout()
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
         self.res_list_widget = QtGui.QListWidget(self.centralwidget)
-        self.res_list_widget.setWordWrap(False)
+        self.res_list_widget.setProperty("isWrapping", True)
+        self.res_list_widget.setWordWrap(True)
         self.res_list_widget.setObjectName("res_list_widget")
         self.horizontalLayout_6.addWidget(self.res_list_widget)
         self.options_list_widget = QtGui.QListWidget(self.centralwidget)
+        self.options_list_widget.setProperty("isWrapping", True)
+        self.options_list_widget.setWordWrap(True)
         self.options_list_widget.setObjectName("options_list_widget")
         self.horizontalLayout_6.addWidget(self.options_list_widget)
         self.verticalLayout.addLayout(self.horizontalLayout_6)
@@ -121,7 +125,7 @@ class Ui_MainWindow(object):
         self.gridLayout.addLayout(self.verticalLayout, 0, 0, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 914, 19))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 896, 19))
         self.menubar.setObjectName("menubar")
         self.menu_About = QtGui.QMenu(self.menubar)
         self.menu_About.setObjectName("menu_About")
@@ -153,6 +157,6 @@ class Ui_MainWindow(object):
         self.label_3.setText(QtGui.QApplication.translate("MainWindow", "Links para download:", None, QtGui.QApplication.UnicodeUTF8))
         self.loading_label.setText(QtGui.QApplication.translate("MainWindow", "Carregando...", None, QtGui.QApplication.UnicodeUTF8))
         self.download_button.setText(QtGui.QApplication.translate("MainWindow", "&Abrir Link", None, QtGui.QApplication.UnicodeUTF8))
-        self.menu_About.setTitle(QtGui.QApplication.translate("MainWindow", "&Help", None, QtGui.QApplication.UnicodeUTF8))
-        self.action_About_Semard.setText(QtGui.QApplication.translate("MainWindow", "&About Semard", None, QtGui.QApplication.UnicodeUTF8))
+        self.menu_About.setTitle(QtGui.QApplication.translate("MainWindow", "&Ajuda", None, QtGui.QApplication.UnicodeUTF8))
+        self.action_About_Semard.setText(QtGui.QApplication.translate("MainWindow", "&Sobre Semard", None, QtGui.QApplication.UnicodeUTF8))
 

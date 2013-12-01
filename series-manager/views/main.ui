@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>914</width>
-    <height>588</height>
+    <width>896</width>
+    <height>603</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -69,6 +69,12 @@
         </item>
         <item>
          <widget class="QLabel" name="image_label">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>245</height>
+           </size>
+          </property>
           <property name="maximumSize">
            <size>
             <width>185</width>
@@ -178,13 +184,23 @@
        <layout class="QHBoxLayout" name="horizontalLayout_6">
         <item>
          <widget class="QListWidget" name="res_list_widget">
+          <property name="isWrapping" stdset="0">
+           <bool>true</bool>
+          </property>
           <property name="wordWrap">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QListWidget" name="options_list_widget"/>
+         <widget class="QListWidget" name="options_list_widget">
+          <property name="isWrapping" stdset="0">
+           <bool>true</bool>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -240,13 +256,13 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>914</width>
+     <width>896</width>
      <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_About">
     <property name="title">
-     <string>&amp;Help</string>
+     <string>&amp;Ajuda</string>
     </property>
     <addaction name="action_About_Semard"/>
    </widget>
@@ -255,7 +271,7 @@
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action_About_Semard">
    <property name="text">
-    <string>&amp;About Semard</string>
+    <string>&amp;Sobre Semard</string>
    </property>
   </action>
  </widget>
