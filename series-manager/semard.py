@@ -248,6 +248,7 @@ class MainWindow(QMainWindow):
         self.com.op.connect(self.show_semard)
         self.ui.action_About_Semard.activated.connect(self.about_semard)
         self.ui.action_Contato.activated.connect(self.show_feedback)
+        self.setWindowTitle('Semard - Animes')
         
     def show_feedback(self):
 	feed = Feedback(self.com)
