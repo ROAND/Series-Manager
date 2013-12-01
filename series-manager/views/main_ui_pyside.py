@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main.ui'
 #
-# Created: Sat Nov 30 17:18:46 2013
+# Created: Sun Dec  1 05:22:16 2013
 #      by: pyside-uic 0.2.14 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -14,7 +14,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(914, 588)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../images/animes.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("../../../../.designer/images/animes.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -123,10 +123,16 @@ class Ui_MainWindow(object):
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 914, 19))
         self.menubar.setObjectName("menubar")
+        self.menu_About = QtGui.QMenu(self.menubar)
+        self.menu_About.setObjectName("menu_About")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
+        self.action_About_Semard = QtGui.QAction(MainWindow)
+        self.action_About_Semard.setObjectName("action_About_Semard")
+        self.menu_About.addAction(self.action_About_Semard)
+        self.menubar.addAction(self.menu_About.menuAction())
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -147,4 +153,6 @@ class Ui_MainWindow(object):
         self.label_3.setText(QtGui.QApplication.translate("MainWindow", "Links para download:", None, QtGui.QApplication.UnicodeUTF8))
         self.loading_label.setText(QtGui.QApplication.translate("MainWindow", "Carregando...", None, QtGui.QApplication.UnicodeUTF8))
         self.download_button.setText(QtGui.QApplication.translate("MainWindow", "&Abrir Link", None, QtGui.QApplication.UnicodeUTF8))
+        self.menu_About.setTitle(QtGui.QApplication.translate("MainWindow", "&Help", None, QtGui.QApplication.UnicodeUTF8))
+        self.action_About_Semard.setText(QtGui.QApplication.translate("MainWindow", "&About Semard", None, QtGui.QApplication.UnicodeUTF8))
 

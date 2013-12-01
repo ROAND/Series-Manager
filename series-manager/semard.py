@@ -8,12 +8,14 @@ import socket
 from threading import Thread
 import PySide
 from PySide.QtCore import Signal, Slot, QObject
-from PySide.QtGui import QApplication, QMainWindow, QMessageBox, QPixmap, QIcon, QFileDialog, QMovie, QSystemTrayIcon
+from PySide.QtGui import QApplication, QMainWindow, QMessageBox, QPixmap, QIcon, QFileDialog, QMovie, QSystemTrayIcon, QMenu
 from views.main_ui_pyside import Ui_MainWindow
 from PySide.QtCore import Qt
 from bs4 import BeautifulSoup
 import bs4
 import subprocess
+import platform
+__version__ = 0.1
 
 timeout = 10
 socket.setdefaulttimeout(timeout)
@@ -25,22 +27,24 @@ def open_url(url):
 
 def get_file(file_name):
     if getattr(sys, 'frozen', False):
-        #The application is frozen
+        # The application is frozen
         datadir = os.path.join(os.path.dirname(sys.executable), "images")
-        #print(datadir)
+        # print(datadir)
     else:
-        #The application is not frozen
+        # The application is not frozen
         datadir = os.path.join(os.path.dirname(__file__), "images")
         #print(os.path.join(datadir, file_name))
     return os.path.join(datadir, file_name)
 
 
 class AnimeList():
+
     def __init__(self, url):
         page = open_url(url)
         page_string = page.read().decode('utf-8')
         soup = BeautifulSoup(page_string)
-        links = soup.find_all("td", {'class': 'views-field views-field-title active'})
+        links = soup.find_all(
+            "td", {'class': 'views-field views-field-title active'})
         self.animes = {}
         self.number = 0
         for td in links:
@@ -57,6 +61,7 @@ class AnimeList():
 
 
 class Episode():
+
     def __init__(self, name):
         self.name = name
         self.links = []
@@ -66,13 +71,14 @@ class Episode():
 
 
 class EpisodeList():
+
     def __init__(self, url):
-        #Thread.__init__(self)
+        # Thread.__init__(self)
         self.url = url
         self.episodes = {}
         self.sinopse = None
         self.run()
-        #self.start()
+        # self.start()
 
     def run(self):
         page = open_url(self.url)
@@ -105,8 +111,36 @@ class EpisodeList():
 class Comunicate(QObject):
     sig = Signal(str)
     img = Signal(str)
+    op = Signal(str)
+    msg = Signal(str)
+
+
+class SystemTrayIcon(QSystemTrayIcon):
+
+    def __init__(self, icon, com, parent=None):
+        QSystemTrayIcon.__init__(self, icon, parent)
+        menu = QMenu(parent)
+        showAction = menu.addAction("Show")
+        showAction.activated.connect(self.show_action)
+        exitAction = menu.addAction("Exit")
+        exitAction.activated.connect(self.close_event)
+        self.activated.connect(self.tray_activated)
+        self.setContextMenu(menu)
+        self.com = com
+
+    def show_action(self):
+        self.com.op.emit('open')
+
+    def tray_activated(self, reason):
+        if reason is QSystemTrayIcon.DoubleClick:
+            self.com.op.emit('open')
+
+    def close_event(self):
+        sys.exit()
+
 
 class MainWindow(QMainWindow):
+
     def __init__(self):
         super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
@@ -131,10 +165,28 @@ class MainWindow(QMainWindow):
         self.ui.loading_label.setMovie(self.movie)
         self.link = None
         self.main_download_page = None
-        tray = QSystemTrayIcon()
-        tray.setIcon(QIcon(get_file('animes.png')))
-        tray.show()
-        tray.showMessage('MSG', 'Mensaaaaaaagem', msecs=1000)
+        self.tray = SystemTrayIcon(
+            QIcon(get_file('animes.png')), self.com, self)
+        self.com.op.connect(self.show_semard)
+        self.ui.action_About_Semard.activated.connect(self.about_semard)
+
+    def about_semard(self):
+        about = QMessageBox.about(self, "About Semard",
+        """<b>Semard</b> v%s
+        <p><b>Copyright (C) 2013</b> Ronnie Andrew.</p>
+        <p>All rights reserved in accordance with GPL v3 or later - NO WARRANTIES!</p>
+        <p><b>Official Website:</b> <a href='https://github.com/ROAND/Series-Manager'>GitHub</a></p>
+        <p><b>Platform: </b>%s</p>
+          """ % (__version__, platform.system()))
+
+    def show_semard(self, message):
+        self.show()
+
+    def closeEvent(self, event):
+        self.hide()
+        self.tray.show()
+        self.tray.showMessage(u'Executando', u'Semard ainda está em execução')
+        event.ignore()
 
     @Slot(str)
     def set_image(self, img_str):
@@ -144,18 +196,16 @@ class MainWindow(QMainWindow):
     def message(self, message):
         if message in 'ended':
             self.ui.loading_label.hide()
-            #self.repaint()
+            # self.repaint()
             self.ui.anime_list_widget.setEnabled(True)
             self.ui.show_button.setEnabled(True)
             self.movie.stop()
-            pass
         if message in 'started':
             self.ui.loading_label.show()
-            #self.repaint()
+            # self.repaint()
             self.ui.anime_list_widget.setEnabled(False)
             self.ui.show_button.setEnabled(False)
             self.movie.start()
-            pass
 
     def anime_entered(self, item):
         pass
@@ -185,7 +235,8 @@ class MainWindow(QMainWindow):
         dialog = QFileDialog(self)
         dialog.setFileMode(QFileDialog.Directory)
         dialog.setOption(QFileDialog.ShowDirsOnly, True)
-        file_path = os.path.join(dialog.getExistingDirectory(), "%s.torrent" % name.strip())
+        file_path = os.path.join(
+            dialog.getExistingDirectory(), "%s.torrent" % name.strip())
         urllib.urlretrieve(link, file_path)
         self.ui.loading_label.hide()
         msgBox = QMessageBox()
@@ -230,7 +281,7 @@ class MainWindow(QMainWindow):
         anime_name = self.ui.anime_list_widget.currentItem().text()
         link = self.anime_list[anime_name]
         self.episodes = EpisodeList(link)
-        #self.episodes.join()
+        # self.episodes.join()
         self.link = self.get_img_link(link)
         self.episode_list = self.episodes.get_episodes()
 
@@ -240,15 +291,16 @@ class MainWindow(QMainWindow):
         file_name = img_link
         if os.path.exists(get_file(file_name)):
             self.com.img.emit(get_file(file_name))
-            #self.ui.image_label.setPixmap(QPixmap(get_file(file_name)))
+            # self.ui.image_label.setPixmap(QPixmap(get_file(file_name)))
         else:
             if img_link is not None:
-                file_name = img_link.replace('http://www.anbient.net/sites/default/files/imagecache/242x0/imagens/poster/', '')
+                file_name = img_link.replace(
+                    'http://www.anbient.net/sites/default/files/imagecache/242x0/imagens/poster/', '')
                 urllib.urlretrieve(
                     'http://www.anbient.net/sites/default/files/imagecache/242x0/imagens/poster/%s' % file_name,
                     get_file(file_name))
                 self.com.img.emit(get_file(file_name))
-                #self.ui.image_label.setPixmap(QPixmap(get_file(file_name)))
+                # self.ui.image_label.setPixmap(QPixmap(get_file(file_name)))
 
         self.ui.label_sinopse.setText(self.episodes.get_sinopse().strip())
 

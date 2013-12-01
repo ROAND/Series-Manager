@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../images/animes.png</normaloff>../images/animes.png</iconset>
+    <normaloff>../../../../.designer/images/animes.png</normaloff>../../../../.designer/images/animes.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -244,8 +244,20 @@
      <height>19</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu_About">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="action_About_Semard"/>
+   </widget>
+   <addaction name="menu_About"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="action_About_Semard">
+   <property name="text">
+    <string>&amp;About Semard</string>
+   </property>
+  </action>
  </widget>
  <tabstops>
   <tabstop>anime_list_widget</tabstop>
