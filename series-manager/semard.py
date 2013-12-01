@@ -19,7 +19,7 @@ import webbrowser
 from email.mime.text import MIMEText
 import smtplib
 from views.feedback_ui_pyside import Ui_FeedbackDialog
-__version__ = 0.1
+__version__ = 1.0
 
 timeout = 10
 socket.setdefaulttimeout(timeout)

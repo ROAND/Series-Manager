@@ -16,7 +16,7 @@ else:
     exe = Executable(script="semard.py")
 
 setup(name = "Semard",
-        version = "0.1",
-        description = "Semard alpha version",
+        version = "1.0",
+        description = "Semard Beta",
         options = {"build_exe": build_exe_options},
         executables = [exe])
