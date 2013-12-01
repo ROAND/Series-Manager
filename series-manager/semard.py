@@ -291,6 +291,7 @@ class MainWindow(QMainWindow):
         file_name = img_link
         if os.path.exists(get_file(file_name)):
             self.com.img.emit(get_file(file_name))
+            print(get_file(file_name))
             # self.ui.image_label.setPixmap(QPixmap(get_file(file_name)))
         else:
             if img_link is not None:
@@ -300,6 +301,7 @@ class MainWindow(QMainWindow):
                     'http://www.anbient.net/sites/default/files/imagecache/242x0/imagens/poster/%s' % file_name,
                     get_file(file_name))
                 self.com.img.emit(get_file(file_name))
+                print(get_file(file_name))
                 # self.ui.image_label.setPixmap(QPixmap(get_file(file_name)))
 
         self.ui.label_sinopse.setText(self.episodes.get_sinopse().strip())
