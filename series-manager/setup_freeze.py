@@ -9,7 +9,6 @@ build_exe_options = {"packages": ["os"], "excludes": ["tkinter"], "include_files
 
 base = None
 if sys.platform == "win32":
-    #
     exe = Executable(script="semard.py", base="Win32GUI", shortcutName="Semard", shortcutDir="DesktopFolder", icon = "images/animes.ico")
     
 else:

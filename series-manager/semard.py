@@ -175,9 +175,9 @@ class SystemTrayIcon(QSystemTrayIcon):
     def __init__(self, icon, com, parent=None):
         QSystemTrayIcon.__init__(self, icon, parent)
         menu = QMenu(parent)
-        showAction = menu.addAction("Show")
+        showAction = menu.addAction("Mostrar")
         showAction.activated.connect(self.show_action)
-        exitAction = menu.addAction("Exit")
+        exitAction = menu.addAction("Fechar")
         exitAction.activated.connect(self.close_event)
         self.activated.connect(self.tray_activated)
         self.setContextMenu(menu)
@@ -207,6 +207,7 @@ class Feedback(QDialog):
         self.com = com
         self.com.mBox.connect(m_box_exec_success)
         self.com.mBoxEr.connect(m_box_exec)
+        self.setWindowIcon(QIcon(get_file('animes.png')))
 
     def send_mail(self):
         """Calls EmailSender to send the feedback"""
@@ -253,10 +254,10 @@ class MainWindow(QMainWindow):
         feed.exec_()
 
     def about_semard(self):
-        about = QMessageBox.about(self, "About Semard",
-        """<b>Semard</b> v%s
+        about = QMessageBox.about(self, "Sobre Semard",
+        u"""<b>Semard</b> v%s
         <p><b>Copyright (C) 2013</b> Ronnie Andrew.</p>
-        <p>Todos os direitos reservados de acordo com a licença GNU GPL v3 ou posterior - SEM GARANTIA!</p>
+        <p>Todos os direitos reservados de acordo com a licença GNU GPL v3 ou posterior.</p>
         <p><b>Website Oficial:</b> <a href='https://github.com/ROAND/Series-Manager'>GitHub</a></p>
         <p><b>Plataforma: </b>%s</p>
           """ % (__version__, platform.system()))
