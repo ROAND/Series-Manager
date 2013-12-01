@@ -3,7 +3,7 @@ Semard
 
 Find and download your favorite anime torrent files.
 
-This is an alpha version (0.1) any issues please let me know through GitHub.
+This is a beta version (1.0) any issues please let me know through GitHub.
 
 
 Run
