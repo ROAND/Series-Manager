@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main.ui'
 #
-# Created: Sun Dec  1 07:29:26 2013
+# Created: Wed Dec  4 04:32:39 2013
 #      by: pyside-uic 0.2.14 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -76,6 +76,9 @@ class Ui_MainWindow(object):
         spacerItem1 = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
         self.horizontalLayout.addItem(spacerItem1)
         self.verticalLayout.addLayout(self.horizontalLayout)
+        self.label_5 = QtGui.QLabel(self.centralwidget)
+        self.label_5.setObjectName("label_5")
+        self.verticalLayout.addWidget(self.label_5)
         self.line = QtGui.QFrame(self.centralwidget)
         self.line.setFrameShape(QtGui.QFrame.HLine)
         self.line.setFrameShadow(QtGui.QFrame.Sunken)
@@ -156,10 +159,11 @@ class Ui_MainWindow(object):
         self.label_sinopse.setText(QtGui.QApplication.translate("MainWindow", "Sinopse:", None, QtGui.QApplication.UnicodeUTF8))
         self.label_2.setText(QtGui.QApplication.translate("MainWindow", "Procurar:", None, QtGui.QApplication.UnicodeUTF8))
         self.show_button.setText(QtGui.QApplication.translate("MainWindow", "&Show Episodes", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_5.setText(QtGui.QApplication.translate("MainWindow", "Obs: Pode haver lentidão nas pesquisas por serem feitas em tempo real. Por favor aguarde.", None, QtGui.QApplication.UnicodeUTF8))
         self.label_4.setText(QtGui.QApplication.translate("MainWindow", "Episódios", None, QtGui.QApplication.UnicodeUTF8))
         self.label_3.setText(QtGui.QApplication.translate("MainWindow", "Links para download:", None, QtGui.QApplication.UnicodeUTF8))
         self.loading_label.setText(QtGui.QApplication.translate("MainWindow", "Carregando...", None, QtGui.QApplication.UnicodeUTF8))
-        self.download_button.setText(QtGui.QApplication.translate("MainWindow", "&Abrir Link", None, QtGui.QApplication.UnicodeUTF8))
+        self.download_button.setText(QtGui.QApplication.translate("MainWindow", "&Download", None, QtGui.QApplication.UnicodeUTF8))
         self.menu_About.setTitle(QtGui.QApplication.translate("MainWindow", "&Ajuda", None, QtGui.QApplication.UnicodeUTF8))
         self.action_About_Semard.setText(QtGui.QApplication.translate("MainWindow", "&Sobre Semard", None, QtGui.QApplication.UnicodeUTF8))
         self.action_Contato.setText(QtGui.QApplication.translate("MainWindow", "&Contato", None, QtGui.QApplication.UnicodeUTF8))

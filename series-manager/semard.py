@@ -1,25 +1,35 @@
 #!/usr/bin/env python2
 #-*- coding: utf-8 -*-
+import subprocess
 import sys
 import os
 import urllib2
 import urllib
+import urlparse
 import socket
 from threading import Thread
-import PySide
-from PySide.QtCore import Signal, Slot, QObject
-from PySide.QtGui import QApplication, QMainWindow, QMessageBox, QPixmap, QIcon, QFileDialog, QMovie, QSystemTrayIcon, QMenu, QDialog
-from views.main_ui_pyside import Ui_MainWindow
-from PySide.QtCore import Qt
-from bs4 import BeautifulSoup
-import bs4
-import subprocess
 import platform
 import webbrowser
 from email.mime.text import MIMEText
 import smtplib
+from PyQt4.QtGui import QMessageBox
+import PySide
+from PySide import QtGui, QtCore
+from PySide.QtCore import Signal, Slot, QObject, QDir
+from PySide.QtGui import QApplication, QMainWindow, QMessageBox, QPixmap, \
+    QIcon, QMovie, QSystemTrayIcon, QMenu, \
+    QDialog, QFileDialog, QInputDialog, QLineEdit
+from PySide.QtCore import Qt
+from bs4 import BeautifulSoup
+import bs4
+import pycurl
+from views.main_ui_pyside import Ui_MainWindow
 from views.feedback_ui_pyside import Ui_FeedbackDialog
-__version__ = 1.0
+from views.browser_ui_pyside import Ui_BrowserWidget
+import vlc
+import user
+
+__version__ = '1.0.0'
 
 timeout = 10
 socket.setdefaulttimeout(timeout)
@@ -27,6 +37,7 @@ socket.setdefaulttimeout(timeout)
 
 def open_url(url):
     return urllib2.urlopen(url)
+
 
 def get_file(file_name):
     if getattr(sys, 'frozen', False):
@@ -38,7 +49,8 @@ def get_file(file_name):
         datadir = os.path.join(os.path.dirname(__file__), "images")
         #print(os.path.join(datadir, file_name))
     return os.path.join(datadir, file_name)
-  
+
+
 @Slot(str)
 def m_box_exec(message):
     """Show message box (error)
@@ -52,7 +64,7 @@ def m_box_exec_success(message):
     @param message: message to show on QMessageBox"""
     QMessageBox.information(None, 'Sucess!', message, QMessageBox.Ok)
 
-  
+
 class Comunicate(QObject):
     sig = Signal(str)
     img = Signal(str)
@@ -61,8 +73,8 @@ class Comunicate(QObject):
     mBox = Signal(str)
     mBoxEr = Signal(str)
 
-class EmailSender(Thread):
 
+class EmailSender(Thread):
     """Sends feedback mail"""
 
     def __init__(self, nome, app_name, email, mensagem, com):
@@ -80,7 +92,7 @@ class EmailSender(Thread):
     def send_mail(self, nome, app_name, email, mensagem):
         """Sends the email to suporte@roandigital"""
         try:
-            sender = "contato@roandigital.com"
+            sender = "contato@roandigFile nameital.com"
             receivers = ['suporte@roandigital.com']
             message = MIMEText(
                 mensagem + os.linesep + "Application: %s" % app_name)
@@ -97,33 +109,35 @@ class EmailSender(Thread):
                 u'O email foi enviado com sucesso. \n\nObrigado pelo seu feedback!')
         except Exception as e:
             self.com.mBoxEr.emit(
-                u'O email não foi enviado.\n\n Verifique sua conexão com a internet.')
+                u'O email não foi enviado.\n\nVerifique sua conexão com a internet.')
+
 
 class AnimeList():
-
     def __init__(self, url):
-        page = open_url(url)
-        page_string = page.read().decode('utf-8')
-        soup = BeautifulSoup(page_string)
-        links = soup.find_all(
-            "td", {'class': 'views-field views-field-title active'})
-        self.animes = {}
-        self.number = 0
-        for td in links:
-            if isinstance(td, bs4.element.Tag):
-                for a in td.children:
-                    if isinstance(a, bs4.element.Tag):
-                        anime_link = 'http://www.anbient.net' + a['href']
-                        anime_name = a.string
-                        self.animes[anime_name] = anime_link
-                        self.number += 1
+        try:
+            page = open_url(url)
+            page_string = page.read().decode('utf-8')
+            soup = BeautifulSoup(page_string)
+            links = soup.find_all(
+                "td", {'class': 'views-field views-field-title active'})
+            self.animes = {}
+            self.number = 0
+            for td in links:
+                if isinstance(td, bs4.element.Tag):
+                    for a in td.children:
+                        if isinstance(a, bs4.element.Tag):
+                            anime_link = 'http://www.anbient.net' + a['href']
+                            anime_name = a.string
+                            self.animes[anime_name] = anime_link
+                            self.number += 1
+        except Exception as er:
+            print(er.message)
 
     def get_attrs(self):
         return self.number, self.animes
 
 
 class Episode():
-
     def __init__(self, name):
         self.name = name
         self.links = []
@@ -133,7 +147,6 @@ class Episode():
 
 
 class EpisodeList():
-
     def __init__(self, url):
         # Thread.__init__(self)
         self.url = url
@@ -143,25 +156,28 @@ class EpisodeList():
         # self.start()
 
     def run(self):
-        page = open_url(self.url)
-        page_string = page.read().decode('utf-8')
-        soup = BeautifulSoup(page_string)
-        links = soup.find_all("div", {'class': 'boxmeio'})
-        span_sinopse = soup.find_all('span', {'id': 'sinopse'})
-        for chil in span_sinopse:
-            if isinstance(chil, bs4.element.Tag):
-                self.sinopse = chil.string
+        try:
+            page = open_url(self.url)
+            page_string = page.read().decode('utf-8')
+            soup = BeautifulSoup(page_string)
+            links = soup.find_all("div", {'class': 'boxmeio'})
+            span_sinopse = soup.find_all('span', {'id': 'sinopse'})
+            for chil in span_sinopse:
+                if isinstance(chil, bs4.element.Tag):
+                    self.sinopse = chil.string
 
-        for div in links:
-            if isinstance(div, bs4.element.Tag):
-                episode_name = div.string
-                episode_link = div.parent['href']
-                if episode_name not in self.episodes.keys():
-                    episode = Episode(episode_name)
-                    self.episodes[episode_name] = episode
-                    self.episodes[episode_name].links.append(episode_link)
-                else:
-                    self.episodes[episode_name].links.append(episode_link)
+            for div in links:
+                if isinstance(div, bs4.element.Tag):
+                    episode_name = div.string
+                    episode_link = div.parent['href']
+                    if episode_name not in self.episodes.keys():
+                        episode = Episode(episode_name)
+                        self.episodes[episode_name] = episode
+                        self.episodes[episode_name].links.append(episode_link)
+                    else:
+                        self.episodes[episode_name].links.append(episode_link)
+        except Exception as er:
+            print(er.message)
 
     def get_episodes(self):
         return self.episodes
@@ -171,7 +187,6 @@ class EpisodeList():
 
 
 class SystemTrayIcon(QSystemTrayIcon):
-
     def __init__(self, icon, com, parent=None):
         QSystemTrayIcon.__init__(self, icon, parent)
         menu = QMenu(parent)
@@ -193,10 +208,9 @@ class SystemTrayIcon(QSystemTrayIcon):
 
     def close_event(self):
         sys.exit()
-        
-        
-class Feedback(QDialog):
 
+
+class Feedback(QDialog):
     """Send feedback"""
 
     def __init__(self, com):
@@ -217,8 +231,332 @@ class Feedback(QDialog):
         mail.join()
         self.close()
 
-class MainWindow(QMainWindow):
 
+class Player(QtGui.QMainWindow):
+    """A simple Media Player using VLC and Qt """
+
+    def __init__(self, player, master=None):
+        QtGui.QMainWindow.__init__(self, master)
+        self.setWindowTitle("Semard: Mini-Player")
+
+        # creating a basic vlc instance
+        #self.instance = vlc.Instance()
+        # creating an empty vlc media player
+        self.mediaplayer = player  # self.instance.media_player_new()
+        self.setWindowIcon(QIcon(get_file('animes.png')))
+
+        #self.ui = self.createUI()
+        self.isPaused = False
+
+    def toogleFullscreen(self):
+        if self.isFullScreen():
+            self.playbutton.show()
+            self.reloadbutton.show()
+            self.positionslider.show()
+            self.volumeslider.show()
+            self.menubar.show()
+            self.vboxlayout.setContentsMargins(0, 0, 0, 0)
+            self.showNormal()
+        else:
+            self.playbutton.hide()
+            self.reloadbutton.hide()
+            self.positionslider.hide()
+            self.volumeslider.hide()
+            self.menubar.hide()
+            self.vboxlayout.setContentsMargins(0, 0, 0, 0)
+            self.showFullScreen()
+
+    def mouseDoubleClickEvent(self, event):
+        # self.mediaplayer.toggle_fullscreen()
+        self.toogleFullscreen()
+
+    def setMedia(self, media):
+        self.media = media
+
+    def setPlayer(self, player):
+        self.mediaplayer = player
+
+    def closeEvent(self, event):
+        self.exit_media()
+
+    def createUI(self):
+        """Set up the user interface, signals & slots
+        """
+        self.widget = QtGui.QWidget(self)
+        self.setCentralWidget(self.widget)
+
+        # In this widget, the video will be drawn
+        self.videoframe = QtGui.QFrame()
+        self.palette = self.videoframe.palette()
+        self.palette.setColor(QtGui.QPalette.Window,
+                              QtGui.QColor(0, 0, 0))
+        self.videoframe.setPalette(self.palette)
+        self.videoframe.setAutoFillBackground(True)
+
+        self.positionslider = QtGui.QSlider(QtCore.Qt.Horizontal, self)
+        self.positionslider.setToolTip("Position")
+        self.positionslider.setMaximum(1000)
+        self.connect(self.positionslider,
+                     QtCore.SIGNAL("sliderMoved(int)"), self.setPosition)
+
+        self.hbuttonbox = QtGui.QHBoxLayout()
+        self.playbutton = QtGui.QPushButton("Play")
+        self.hbuttonbox.addWidget(self.playbutton)
+        self.connect(self.playbutton, QtCore.SIGNAL("clicked()"),
+                     self.PlayPause)
+
+        self.reloadbutton = QtGui.QPushButton("Reload")
+        self.hbuttonbox.addWidget(self.reloadbutton)
+        self.connect(self.reloadbutton, QtCore.SIGNAL("clicked()"),
+                     self.Reload)
+        self.reloadbutton.setEnabled(False)
+        self.reloadbutton.hide()
+
+        self.hbuttonbox.addStretch(1)
+        self.volumeslider = QtGui.QSlider(QtCore.Qt.Horizontal, self)
+        self.volumeslider.setMaximum(100)
+        self.volumeslider.setValue(self.mediaplayer.audio_get_volume())
+        self.volumeslider.setToolTip("Volume")
+        self.hbuttonbox.addWidget(self.volumeslider)
+        self.connect(self.volumeslider,
+                     QtCore.SIGNAL("valueChanged(int)"),
+                     self.setVolume)
+
+        self.vboxlayout = QtGui.QVBoxLayout()
+        self.vboxlayout.addWidget(self.videoframe)
+        self.vboxlayout.addWidget(self.positionslider)
+        self.vboxlayout.addLayout(self.hbuttonbox)
+
+        self.widget.setLayout(self.vboxlayout)
+
+        #open = QtGui.QAction("&Open", self)
+        #self.connect(open, QtCore.SIGNAL("triggered()"), self.OpenFile)
+        ext = QtGui.QAction("&Exit", self)
+        self.connect(ext, QtCore.SIGNAL("triggered()"), self.exit_media)
+        self.menubar = self.menuBar()
+        filemenu = self.menubar.addMenu("&File")
+        # filemenu.addAction(open)
+        filemenu.addSeparator()
+        filemenu.addAction(ext)
+
+        self.timer = QtCore.QTimer(self)
+        self.timer.setInterval(200)
+        self.connect(self.timer, QtCore.SIGNAL("timeout()"),
+                     self.updateUI)
+
+    def Reload(self):
+        self.mediaplayer.release()
+        self.mediaplayer.set_media(self.media)
+        self.media.parse()
+        self.mediaplayer.play()
+
+    def exit_media(self):
+        self.mediaplayer.stop()
+        self.close()
+
+    def PlayPause(self):
+        """Toggle play/pause status
+        """
+        if self.mediaplayer.is_playing():
+            self.mediaplayer.pause()
+            self.playbutton.setText("Play")
+            self.isPaused = True
+        else:
+            if self.mediaplayer.play() == -1:
+                # self.OpenFile()
+                return
+            self.mediaplayer.play()
+            self.playbutton.setText("Pause")
+            self.timer.start()
+            self.isPaused = False
+
+    def Stop(self):
+        """Stop player
+        """
+        self.mediaplayer.stop()
+        self.playbutton.setText("Play")
+
+    def OpenFile(self, filename=None):
+        """Open a media file in a MediaPlayer
+        """
+        if filename is None:
+            filename = QFileDialog.getOpenFileName(
+                self, "Open File", user.home)
+        if not filename:
+            return
+
+        # create the media
+        self.mediaplayer = self.instance.media_player_new()
+        # put the media in the media player
+        self.mediaplayer.set_media(self.media)
+        # parse the metadata of the file
+        self.media.parse()
+        # set the title of the track as window title
+        self.setWindowTitle(self.media.get_meta(0))
+
+        # the media player has to be 'connected' to the QFrame
+        # (otherwise a video would be displayed in it's own window)
+        # this is platform specific!
+        # you have to give the id of the QFrame (or similar object) to
+        # vlc, different platforms have different functions for this
+        if sys.platform == "linux2":  # for Linux using the X Server
+            self.mediaplayer.set_xwindow(self.videoframe.winId())
+        elif sys.platform == "win32":  # for Windows
+            self.mediaplayer.set_hwnd(self.videoframe.winId())
+        elif sys.platform == "darwin":  # for MacOS
+            self.mediaplayer.set_agl(self.videoframe.windId())
+        self.PlayPause()
+
+    def setVolume(self, Volume):
+        """Set the volume
+        """
+        self.mediaplayer.audio_set_volume(Volume)
+
+    def setPosition(self, position):
+        """Set the position
+        """
+        # setting the position to where the slider was dragged
+        self.mediaplayer.set_position(position / 1000.0)
+        # the vlc MediaPlayer needs a float value between 0 and 1, Qt
+        # uses integer variables, so you need a factor; the higher the
+        # factor, the more precise are the results
+        # (1000 should be enough)
+
+    def updateUI(self):
+        """updates the user interface"""
+        # setting the slider to the desired position
+        self.positionslider.setValue(self.mediaplayer.get_position() * 1000)
+
+        if not self.mediaplayer.is_playing():
+            # no need to call this function if nothing is played
+            self.timer.stop()
+            if not self.isPaused:
+                # after the video finished, the play button stills shows
+                # "Pause", not the desired behavior of a media player
+                # this will fix it
+                self.Stop()
+
+
+class Browser(QDialog):
+    def __init__(self):
+        super(Browser, self).__init__()
+        self.ui = Ui_BrowserWidget()
+        self.ui.setupUi(self)
+        self.ui.webView.page().setForwardUnsupportedContent(True)
+        self.ui.webView.page().unsupportedContent.connect(self.download)
+        self.setWindowIcon(QIcon(get_file('animes.png')))
+        self.player_window = player_w
+
+    def showBox(self, text, infoText):
+        mbox = QMessageBox()
+        mbox.setWindowTitle("Semard")
+        mbox.setText(text)
+        mbox.setInformativeText(infoText)
+        mbox.setStandardButtons(QMessageBox.Yes | QMessageBox.No
+                                | QMessageBox.Cancel)
+        mbox.setDefaultButton(QMessageBox.Yes)
+        return mbox.exec_()
+
+    def openVideo(self, filepath, duplicateMode):
+        movie = os.path.expanduser(filepath)
+        if 'http://' not in filepath:
+            if not os.access(movie, os.R_OK):
+                print('Error: %s file is not readable' % movie)
+            sys.exit(1)
+        ofd = QFileDialog()
+        ofd.setFileMode(QFileDialog.Directory)
+        ofd.setOption(QFileDialog.ShowDirsOnly)
+        res = ofd.getExistingDirectory()
+        split = urlparse.urlsplit(filepath)
+        print(split)
+        #name = QInputDialog.getText(self, 'Escolha nome do arquivo', 'Nome do arquivo:')
+        name = split.path.split("/")[-1]
+        pa = os.path.join(res, name)
+        if duplicateMode:
+            try:
+                media = instance.media_new(movie, 'sout=#duplicate{dst=file{dst=%s},dst=display}' % pa)
+            except NameError:
+                print ('NameError: % (%s vs Libvlc %s)' % (sys.exc_info()[1],
+                                                           vlc.__version__, vlc.libvlc_get_version()))
+        else:
+            try:
+                media = instance.media_new(movie)
+            except NameError:
+                print ('NameError: % (%s vs Libvlc %s)' % (sys.exc_info()[1],
+                                                           vlc.__version__, vlc.libvlc_get_version()))
+            # "--sout=#duplicate{dst=file{dst=example.mpg},dst=display}"
+
+        #player = instance.media_player_new()
+        pplayer.set_media(media)
+        self.player_window.setMedia(media)
+        self.player_window.createUI()
+        #self.player_window = Player()
+        media.parse()
+        self.player_window.setWindowTitle(media.get_meta(0))
+        self.player_window.show()
+        self.player_window.resize(640, 480)
+        pplayer.set_xwindow(self.player_window.videoframe.winId())
+        pplayer.play()
+
+
+    def download(self, reply):
+        filepath = reply.url().toString()
+        dl = self.showBox('Iniciar download?', filepath)
+        if dl == QMessageBox.Yes:
+            split = urlparse.urlsplit(filepath)
+            filename = split.path.split("/")[-1]
+            dw = Downloader(str(filepath), str(filename))
+            dw.start()
+        elif dl == QMessageBox.No:
+            pass
+        elif dl == QMessageBox.Cancel:
+            pass
+
+        rep = self.showBox('Assistir agora?', filepath)
+        if rep == QMessageBox.Yes:
+            self.openVideo(filepath, False)
+            self.close()
+            main.hide()
+        elif rep == QMessageBox.No:
+            pass
+        elif rep == QMessageBox.Cancel:
+            pass
+
+
+class Downloader(Thread):
+    def __init__(self, url, filename):
+        Thread.__init__(self)
+        self.url = url
+        self.filename = filename
+
+    def run(self):
+       self.curl_download(self.url, self.filename)
+
+    def curl_download(self, url, filename):
+        """Rate limit in bytes"""
+        c = pycurl.Curl()
+        c.setopt(pycurl.URL, url)
+        #c.setopt(c.MAX_RECV_SPEED_LARGE, rate_limit)
+        if os.path.exists(filename):
+            file_id = open(filename, "ab")
+            c.setopt(pycurl.RESUME_FROM, os.path.getsize(filename))
+        else:
+            file_id = open(filename, "wb")
+
+        c.setopt(pycurl.WRITEDATA, file_id)
+        c.setopt(pycurl.NOPROGRESS, 0)
+        c.setopt(pycurl.PROGRESSFUNCTION, self.curl_progress)
+        c.perform()
+
+    def curl_progress(self, total, existing, upload_t, upload_d):
+        try:
+            frac = float(existing) / float(total)
+        except:
+            frac = 0
+        print "Downloaded %d/%d (%0.2f%%)" % (existing, total, frac)
+
+
+class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         self.ui = Ui_MainWindow()
@@ -249,14 +587,16 @@ class MainWindow(QMainWindow):
         self.ui.action_About_Semard.activated.connect(self.about_semard)
         self.ui.action_Contato.activated.connect(self.show_feedback)
         self.setWindowTitle('Semard - Animes')
-        
+        self.browser = None
+        self.player = None
+
     def show_feedback(self):
-	feed = Feedback(self.com)
+        feed = Feedback(self.com)
         feed.exec_()
 
     def about_semard(self):
         about = QMessageBox.about(self, "Sobre Semard",
-        u"""<b>Semard</b> v%s
+                                  u"""<b>Semard</b> v%s
         <p><b>Copyright (C) 2013</b> Ronnie Andrew.</p>
         <p>Todos os direitos reservados de acordo com a licença GNU GPL v3 ou posterior.</p>
         <p><b>Website Oficial:</b> <a href='https://github.com/ROAND/Series-Manager'>GitHub</a></p>
@@ -318,7 +658,8 @@ class MainWindow(QMainWindow):
         msgBox = QMessageBox()
         msgBox.setWindowTitle(u'Informação')
         msgBox.setText(u'Browser padrão')
-        msgBox.setInformativeText(u'Você deseja abrir este link com o seu browser padrão?')
+        msgBox.setInformativeText(
+            u'Você deseja abrir este link com o seu browser padrão?')
         msgBox.setStandardButtons(QMessageBox.No | QMessageBox.Yes)
         msgBox.setDefaultButton(QMessageBox.Yes)
         ret = msgBox.exec_()
@@ -327,8 +668,9 @@ class MainWindow(QMainWindow):
                 webbrowser.open(link)
             else:
                 webbrowser.open(link)
-                #subprocess.Popen(['ktorrent', file_path])
-                pass
+        else:
+            browser.ui.webView.setUrl(link)
+            browser.show()
         self.com.sig.emit('ended')
 
     def keyPressEvent(self, event):
@@ -409,9 +751,17 @@ class MainWindow(QMainWindow):
         else:
             self.ui.labelSearch.setText('Not Found!')
 
+    def setBrowser(self, browser_param):
+        self.browser = browser_param
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     main = MainWindow()
+    instance = vlc.Instance()
+    pplayer = instance.media_player_new()
+    player_w = Player(pplayer)
+    browser = Browser()
+    main.setBrowser(browser)
     main.show()
     sys.exit(app.exec_())

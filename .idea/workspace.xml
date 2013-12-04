@@ -1,0 +1,867 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1837d430-3e07-4976-9300-a2f3d763a594" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/series-manager/images/23083l.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/series-manager/images/akahori-gedou-hour-love-game-poster.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/series-manager/views/browser.ui" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/series-manager/images/magi-the-kingdom-of-magic-poster.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/series-manager/images/seitokai-yakuindomo-poster.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/series-manager/views/browser_ui_pyside.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/series-manager/test.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/series-manager/vlc.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/series-manager/views/main.ui" afterPath="$PROJECT_DIR$/series-manager/views/main.ui" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Series-Manager.iml" afterPath="$PROJECT_DIR$/.idea/Series-Manager.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/series-manager/views/feedback_ui_pyside.py" afterPath="$PROJECT_DIR$/series-manager/views/feedback_ui_pyside.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/series-manager/views/main_ui_pyside.py" afterPath="$PROJECT_DIR$/series-manager/views/main_ui_pyside.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/series-manager/semard.py" afterPath="$PROJECT_DIR$/series-manager/semard.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/series-manager/setup_freeze.py" afterPath="$PROJECT_DIR$/series-manager/setup_freeze.py" />
+    </list>
+    <ignored path="Series-Manager.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="Series-Manager" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="semard.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/series-manager/semard.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="556" column="0" selection-start="19129" selection-end="19129" vertical-scroll-proportion="1.2380953" vertical-offset="3186" max-vertical-offset="4032">
+              <folding>
+                <element signature="e#46#63#0" expanded="true" />
+                <element signature="e#925#952#0" expanded="false" />
+                <element signature="e#984#1363#0" expanded="false" />
+                <element signature="e#1406#1553#0" expanded="false" />
+                <element signature="e#1954#3380#0" expanded="false" />
+                <element signature="e#2051#2213#0" expanded="false" />
+                <element signature="e#2242#2346#0" expanded="false" />
+                <element signature="e#2414#3380#0" expanded="false" />
+                <element signature="e#3406#4289#0" expanded="false" />
+                <element signature="e#4258#4289#0" expanded="false" />
+                <element signature="e#4347#4387#0" expanded="false" />
+                <element signature="e#4422#4450#0" expanded="false" />
+                <element signature="e#4511#4654#0" expanded="false" />
+                <element signature="e#5746#5766#0" expanded="false" />
+                <element signature="e#5803#5822#0" expanded="false" />
+                <element signature="e#5920#6325#0" expanded="false" />
+                <element signature="e#6362#6386#0" expanded="false" />
+                <element signature="e#6434#6512#0" expanded="false" />
+                <element signature="e#6549#6559#0" expanded="false" />
+                <element signature="e#6591#7284#0" expanded="false" />
+                <element signature="e#6649#6983#0" expanded="false" />
+                <element signature="e#7018#7284#0" expanded="false" />
+                <element signature="e#7324#14733#0" expanded="false" />
+                <element signature="e#7877#8456#0" expanded="false" />
+                <element signature="e#8750#8767#0" expanded="false" />
+                <element signature="e#11455#11587#0" expanded="false" />
+                <element signature="e#11623#11667#0" expanded="false" />
+                <element signature="e#11702#12160#0" expanded="false" />
+                <element signature="e#12190#12288#0" expanded="false" />
+                <element signature="e#12337#13609#0" expanded="false" />
+                <element signature="e#13652#13731#0" expanded="false" />
+                <element signature="e#13778#14155#0" expanded="false" />
+                <element signature="e#14189#14733#0" expanded="false" />
+                <element signature="e#14792#15125#0" expanded="false" />
+                <element signature="e#18137#19128#0" expanded="false" />
+                <element signature="e#19166#27146#0" expanded="false" />
+                <element signature="e#19194#20698#0" expanded="false" />
+                <element signature="e#20737#20783#0" expanded="false" />
+                <element signature="e#20821#21260#0" expanded="false" />
+                <element signature="e#21306#21317#0" expanded="false" />
+                <element signature="e#21360#21473#0" expanded="false" />
+                <element signature="e#21532#21579#0" expanded="false" />
+                <element signature="e#21636#22102#0" expanded="false" />
+                <element signature="e#22147#22151#0" expanded="false" />
+                <element signature="e#22191#22511#0" expanded="false" />
+                <element signature="e#22551#22887#0" expanded="false" />
+                <element signature="e#22921#23736#0" expanded="false" />
+                <element signature="e#23782#24155#0" expanded="false" />
+                <element signature="e#24210#24647#0" expanded="false" />
+                <element signature="e#24687#26436#0" expanded="false" />
+                <element signature="e#26475#26554#0" expanded="false" />
+                <element signature="e#26604#26748#0" expanded="false" />
+                <element signature="e#26803#27067#0" expanded="false" />
+                <element signature="e#27118#27146#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="setup_freeze.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/series-manager/setup_freeze.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="0" selection-start="341" selection-end="341" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="504">
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitLogSettings">
+    <option name="myDateState">
+      <MyDateState />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/series-manager/reg.py" />
+        <option value="$PROJECT_DIR$/series-manager/test.py" />
+        <option value="$PROJECT_DIR$/series-manager/setup_freeze.py" />
+        <option value="$PROJECT_DIR$/series-manager/semard.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-2" />
+    <option name="y" value="-3" />
+    <option name="width" value="1370" />
+    <option name="height" value="740" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Series-Manager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Series-Manager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Series-Manager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Series-Manager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Series-Manager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="series-manager" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.lastSelected" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="recentsLimit" value="5" />
+    <property name="FullScreen" value="false" />
+    <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <PyConsoleSettings />
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.semard">
+    <configuration default="false" name="semard" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/series-manager" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Series-Manager" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/series-manager/semard.py" />
+      <option name="PARAMETERS" value="" />
+      <RunnerSettings RunnerId="PyDebugRunner" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PyDebugRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="py.test">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Series-Manager" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="testToRun" value="" />
+      <option name="keywords" value="" />
+      <option name="params" value="" />
+      <option name="USE_PARAM" value="false" />
+      <option name="USE_KEYWORD" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Nosetests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Series-Manager" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Series-Manager" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Series-Manager" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Series-Manager" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Attests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Series-Manager" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Python.semard" />
+    </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Python.semard" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1837d430-3e07-4976-9300-a2f3d763a594" name="Default" comment="" />
+      <created>1385233475722</created>
+      <updated>1385233475722</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-2" y="-3" width="1370" height="740" extended-state="6" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3238255" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3238255" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17721519" sideWeight="0.67785233" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11392405" sideWeight="0.6795302" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39765102" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32996634" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3204698" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="myTodoPanelSettings">
+      <TodoPanelSettings />
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="7" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/series-manager/semard.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="338" column="7" selection-start="11090" selection-end="11090" vertical-scroll-proportion="0.0" vertical-offset="6084" max-vertical-offset="6822">
+          <folding>
+            <element signature="e#46#63#0" expanded="true" />
+            <element signature="e#925#952#0" expanded="false" />
+            <element signature="e#984#1363#0" expanded="false" />
+            <element signature="e#1406#1553#0" expanded="false" />
+            <element signature="e#1954#3380#0" expanded="false" />
+            <element signature="e#2051#2213#0" expanded="false" />
+            <element signature="e#2242#2346#0" expanded="false" />
+            <element signature="e#2414#3380#0" expanded="false" />
+            <element signature="e#3406#4289#0" expanded="false" />
+            <element signature="e#4258#4289#0" expanded="false" />
+            <element signature="e#4347#4387#0" expanded="false" />
+            <element signature="e#4422#4450#0" expanded="false" />
+            <element signature="e#4511#4654#0" expanded="false" />
+            <element signature="e#5746#5766#0" expanded="false" />
+            <element signature="e#5803#5822#0" expanded="false" />
+            <element signature="e#5920#6325#0" expanded="false" />
+            <element signature="e#6362#6386#0" expanded="false" />
+            <element signature="e#6434#6512#0" expanded="false" />
+            <element signature="e#6549#6559#0" expanded="false" />
+            <element signature="e#6591#7284#0" expanded="false" />
+            <element signature="e#6649#6983#0" expanded="false" />
+            <element signature="e#7018#7284#0" expanded="false" />
+            <element signature="e#7324#14733#0" expanded="false" />
+            <element signature="e#7877#8456#0" expanded="false" />
+            <element signature="e#8750#8767#0" expanded="false" />
+            <element signature="e#11455#11587#0" expanded="false" />
+            <element signature="e#11623#11667#0" expanded="false" />
+            <element signature="e#11702#12160#0" expanded="false" />
+            <element signature="e#12190#12288#0" expanded="false" />
+            <element signature="e#12337#13609#0" expanded="false" />
+            <element signature="e#13652#13731#0" expanded="false" />
+            <element signature="e#13778#14155#0" expanded="false" />
+            <element signature="e#14189#14733#0" expanded="false" />
+            <element signature="e#14792#15125#0" expanded="false" />
+            <element signature="e#18137#19128#0" expanded="false" />
+            <element signature="e#19166#27146#0" expanded="false" />
+            <element signature="e#19194#20698#0" expanded="false" />
+            <element signature="e#20737#20783#0" expanded="false" />
+            <element signature="e#20821#21260#0" expanded="false" />
+            <element signature="e#21306#21317#0" expanded="false" />
+            <element signature="e#21360#21473#0" expanded="false" />
+            <element signature="e#21532#21579#0" expanded="false" />
+            <element signature="e#21636#22102#0" expanded="false" />
+            <element signature="e#22147#22151#0" expanded="false" />
+            <element signature="e#22191#22511#0" expanded="false" />
+            <element signature="e#22551#22887#0" expanded="false" />
+            <element signature="e#22921#23736#0" expanded="false" />
+            <element signature="e#23782#24155#0" expanded="false" />
+            <element signature="e#24210#24647#0" expanded="false" />
+            <element signature="e#24687#26436#0" expanded="false" />
+            <element signature="e#26475#26554#0" expanded="false" />
+            <element signature="e#26604#26748#0" expanded="false" />
+            <element signature="e#26803#27067#0" expanded="false" />
+            <element signature="e#27118#27146#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/series-manager/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="21" selection-start="851" selection-end="851" vertical-scroll-proportion="0.0" vertical-offset="486" max-vertical-offset="630" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/series-manager/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="21" selection-start="851" selection-end="851" vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="630" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/series-manager/semard.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="416" column="12" selection-start="14012" selection-end="14012" vertical-scroll-proportion="0.0" vertical-offset="6066" max-vertical-offset="6066">
+          <folding>
+            <element signature="e#46#63#0" expanded="true" />
+            <element signature="e#925#952#0" expanded="false" />
+            <element signature="e#984#1363#0" expanded="false" />
+            <element signature="e#1406#1553#0" expanded="false" />
+            <element signature="e#1954#3380#0" expanded="false" />
+            <element signature="e#2051#2213#0" expanded="false" />
+            <element signature="e#2242#2346#0" expanded="false" />
+            <element signature="e#2414#3380#0" expanded="false" />
+            <element signature="e#3406#4289#0" expanded="false" />
+            <element signature="e#4258#4289#0" expanded="false" />
+            <element signature="e#4347#4387#0" expanded="false" />
+            <element signature="e#4422#4450#0" expanded="false" />
+            <element signature="e#4511#4654#0" expanded="false" />
+            <element signature="e#5746#5766#0" expanded="false" />
+            <element signature="e#5803#5822#0" expanded="false" />
+            <element signature="e#5920#6325#0" expanded="false" />
+            <element signature="e#6362#6386#0" expanded="false" />
+            <element signature="e#6434#6512#0" expanded="false" />
+            <element signature="e#6549#6559#0" expanded="false" />
+            <element signature="e#6591#7284#0" expanded="false" />
+            <element signature="e#6649#6983#0" expanded="false" />
+            <element signature="e#7018#7284#0" expanded="false" />
+            <element signature="e#7324#14733#0" expanded="false" />
+            <element signature="e#7877#8456#0" expanded="false" />
+            <element signature="e#8750#8767#0" expanded="false" />
+            <element signature="e#11455#11587#0" expanded="false" />
+            <element signature="e#11623#11667#0" expanded="false" />
+            <element signature="e#11702#12160#0" expanded="false" />
+            <element signature="e#12190#12288#0" expanded="false" />
+            <element signature="e#12337#13609#0" expanded="false" />
+            <element signature="e#13652#13731#0" expanded="false" />
+            <element signature="e#13778#14155#0" expanded="false" />
+            <element signature="e#14189#14733#0" expanded="false" />
+            <element signature="e#14792#15125#0" expanded="false" />
+            <element signature="e#18137#19128#0" expanded="false" />
+            <element signature="e#19166#27146#0" expanded="false" />
+            <element signature="e#19194#20698#0" expanded="false" />
+            <element signature="e#20737#20783#0" expanded="false" />
+            <element signature="e#20821#21260#0" expanded="false" />
+            <element signature="e#21306#21317#0" expanded="false" />
+            <element signature="e#21360#21473#0" expanded="false" />
+            <element signature="e#21532#21579#0" expanded="false" />
+            <element signature="e#21636#22102#0" expanded="false" />
+            <element signature="e#22147#22151#0" expanded="false" />
+            <element signature="e#22191#22511#0" expanded="false" />
+            <element signature="e#22551#22887#0" expanded="false" />
+            <element signature="e#22921#23736#0" expanded="false" />
+            <element signature="e#23782#24155#0" expanded="false" />
+            <element signature="e#24210#24647#0" expanded="false" />
+            <element signature="e#24687#26436#0" expanded="false" />
+            <element signature="e#26475#26554#0" expanded="false" />
+            <element signature="e#26604#26748#0" expanded="false" />
+            <element signature="e#26803#27067#0" expanded="false" />
+            <element signature="e#27118#27146#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/series-manager/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="21" selection-start="851" selection-end="851" vertical-scroll-proportion="0.0" vertical-offset="54" max-vertical-offset="630" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/series-manager/semard.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="152" column="0" selection-start="4937" selection-end="4937" vertical-scroll-proportion="0.0" vertical-offset="2700" max-vertical-offset="5544">
+          <folding>
+            <element signature="e#46#63#0" expanded="true" />
+            <element signature="e#925#952#0" expanded="false" />
+            <element signature="e#984#1363#0" expanded="false" />
+            <element signature="e#1406#1553#0" expanded="false" />
+            <element signature="e#1954#3380#0" expanded="false" />
+            <element signature="e#2051#2213#0" expanded="false" />
+            <element signature="e#2242#2346#0" expanded="false" />
+            <element signature="e#2414#3380#0" expanded="false" />
+            <element signature="e#3406#4289#0" expanded="false" />
+            <element signature="e#4258#4289#0" expanded="false" />
+            <element signature="e#4347#4387#0" expanded="false" />
+            <element signature="e#4422#4450#0" expanded="false" />
+            <element signature="e#4511#4654#0" expanded="false" />
+            <element signature="e#5746#5766#0" expanded="false" />
+            <element signature="e#5803#5822#0" expanded="false" />
+            <element signature="e#5920#6325#0" expanded="false" />
+            <element signature="e#6362#6386#0" expanded="false" />
+            <element signature="e#6434#6512#0" expanded="false" />
+            <element signature="e#6549#6559#0" expanded="false" />
+            <element signature="e#6591#7284#0" expanded="false" />
+            <element signature="e#6649#6983#0" expanded="false" />
+            <element signature="e#7018#7284#0" expanded="false" />
+            <element signature="e#7324#14733#0" expanded="false" />
+            <element signature="e#7877#8456#0" expanded="false" />
+            <element signature="e#8750#8767#0" expanded="false" />
+            <element signature="e#11455#11587#0" expanded="false" />
+            <element signature="e#11623#11667#0" expanded="false" />
+            <element signature="e#11702#12160#0" expanded="false" />
+            <element signature="e#12190#12288#0" expanded="false" />
+            <element signature="e#12337#13609#0" expanded="false" />
+            <element signature="e#13652#13731#0" expanded="false" />
+            <element signature="e#13778#14155#0" expanded="false" />
+            <element signature="e#14189#14733#0" expanded="false" />
+            <element signature="e#14792#15125#0" expanded="false" />
+            <element signature="e#18137#19128#0" expanded="false" />
+            <element signature="e#19166#27146#0" expanded="false" />
+            <element signature="e#19194#20698#0" expanded="false" />
+            <element signature="e#20737#20783#0" expanded="false" />
+            <element signature="e#20821#21260#0" expanded="false" />
+            <element signature="e#21306#21317#0" expanded="false" />
+            <element signature="e#21360#21473#0" expanded="false" />
+            <element signature="e#21532#21579#0" expanded="false" />
+            <element signature="e#21636#22102#0" expanded="false" />
+            <element signature="e#22147#22151#0" expanded="false" />
+            <element signature="e#22191#22511#0" expanded="false" />
+            <element signature="e#22551#22887#0" expanded="false" />
+            <element signature="e#22921#23736#0" expanded="false" />
+            <element signature="e#23782#24155#0" expanded="false" />
+            <element signature="e#24210#24647#0" expanded="false" />
+            <element signature="e#24687#26436#0" expanded="false" />
+            <element signature="e#26475#26554#0" expanded="false" />
+            <element signature="e#26604#26748#0" expanded="false" />
+            <element signature="e#26803#27067#0" expanded="false" />
+            <element signature="e#27118#27146#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/series-manager/semard.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="207" column="88" selection-start="8608" selection-end="8608" vertical-scroll-proportion="0.0" vertical-offset="3636" max-vertical-offset="4932">
+          <folding>
+            <element signature="e#46#63#0" expanded="true" />
+            <element signature="e#925#952#0" expanded="false" />
+            <element signature="e#984#1363#0" expanded="false" />
+            <element signature="e#1406#1553#0" expanded="false" />
+            <element signature="e#1954#3380#0" expanded="false" />
+            <element signature="e#2051#2213#0" expanded="false" />
+            <element signature="e#2242#2346#0" expanded="false" />
+            <element signature="e#2414#3380#0" expanded="false" />
+            <element signature="e#3406#4289#0" expanded="false" />
+            <element signature="e#4258#4289#0" expanded="false" />
+            <element signature="e#4347#4387#0" expanded="false" />
+            <element signature="e#4422#4450#0" expanded="false" />
+            <element signature="e#4511#4654#0" expanded="false" />
+            <element signature="e#5746#5766#0" expanded="false" />
+            <element signature="e#5803#5822#0" expanded="false" />
+            <element signature="e#5920#6325#0" expanded="false" />
+            <element signature="e#6362#6386#0" expanded="false" />
+            <element signature="e#6434#6512#0" expanded="false" />
+            <element signature="e#6549#6559#0" expanded="false" />
+            <element signature="e#6591#7284#0" expanded="false" />
+            <element signature="e#6649#6983#0" expanded="false" />
+            <element signature="e#7018#7284#0" expanded="false" />
+            <element signature="e#7324#14733#0" expanded="false" />
+            <element signature="e#7877#8456#0" expanded="false" />
+            <element signature="e#8750#8767#0" expanded="false" />
+            <element signature="e#11455#11587#0" expanded="false" />
+            <element signature="e#11623#11667#0" expanded="false" />
+            <element signature="e#11702#12160#0" expanded="false" />
+            <element signature="e#12190#12288#0" expanded="false" />
+            <element signature="e#12337#13609#0" expanded="false" />
+            <element signature="e#13652#13731#0" expanded="false" />
+            <element signature="e#13778#14155#0" expanded="false" />
+            <element signature="e#14189#14733#0" expanded="false" />
+            <element signature="e#14792#15125#0" expanded="false" />
+            <element signature="e#18137#19128#0" expanded="false" />
+            <element signature="e#19166#27146#0" expanded="false" />
+            <element signature="e#19194#20698#0" expanded="false" />
+            <element signature="e#20737#20783#0" expanded="false" />
+            <element signature="e#20821#21260#0" expanded="false" />
+            <element signature="e#21306#21317#0" expanded="false" />
+            <element signature="e#21360#21473#0" expanded="false" />
+            <element signature="e#21532#21579#0" expanded="false" />
+            <element signature="e#21636#22102#0" expanded="false" />
+            <element signature="e#22147#22151#0" expanded="false" />
+            <element signature="e#22191#22511#0" expanded="false" />
+            <element signature="e#22551#22887#0" expanded="false" />
+            <element signature="e#22921#23736#0" expanded="false" />
+            <element signature="e#23782#24155#0" expanded="false" />
+            <element signature="e#24210#24647#0" expanded="false" />
+            <element signature="e#24687#26436#0" expanded="false" />
+            <element signature="e#26475#26554#0" expanded="false" />
+            <element signature="e#26604#26748#0" expanded="false" />
+            <element signature="e#26803#27067#0" expanded="false" />
+            <element signature="e#27118#27146#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/series-manager/semard.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="22" selection-start="844" selection-end="844" vertical-scroll-proportion="0.0" vertical-offset="398" max-vertical-offset="1818">
+          <folding>
+            <element signature="e#46#63#0" expanded="true" />
+            <element signature="e#925#952#0" expanded="false" />
+            <element signature="e#984#1363#0" expanded="false" />
+            <element signature="e#1406#1553#0" expanded="false" />
+            <element signature="e#1954#3380#0" expanded="false" />
+            <element signature="e#2051#2213#0" expanded="false" />
+            <element signature="e#2242#2346#0" expanded="false" />
+            <element signature="e#2414#3380#0" expanded="false" />
+            <element signature="e#3406#4289#0" expanded="false" />
+            <element signature="e#4258#4289#0" expanded="false" />
+            <element signature="e#4347#4387#0" expanded="false" />
+            <element signature="e#4422#4450#0" expanded="false" />
+            <element signature="e#4511#4654#0" expanded="false" />
+            <element signature="e#5746#5766#0" expanded="false" />
+            <element signature="e#5803#5822#0" expanded="false" />
+            <element signature="e#5920#6325#0" expanded="false" />
+            <element signature="e#6362#6386#0" expanded="false" />
+            <element signature="e#6434#6512#0" expanded="false" />
+            <element signature="e#6549#6559#0" expanded="false" />
+            <element signature="e#6591#7284#0" expanded="false" />
+            <element signature="e#6649#6983#0" expanded="false" />
+            <element signature="e#7018#7284#0" expanded="false" />
+            <element signature="e#7324#14733#0" expanded="false" />
+            <element signature="e#7877#8456#0" expanded="false" />
+            <element signature="e#8750#8767#0" expanded="false" />
+            <element signature="e#11455#11587#0" expanded="false" />
+            <element signature="e#11623#11667#0" expanded="false" />
+            <element signature="e#11702#12160#0" expanded="false" />
+            <element signature="e#12190#12288#0" expanded="false" />
+            <element signature="e#12337#13609#0" expanded="false" />
+            <element signature="e#13652#13731#0" expanded="false" />
+            <element signature="e#13778#14155#0" expanded="false" />
+            <element signature="e#14189#14733#0" expanded="false" />
+            <element signature="e#14792#15125#0" expanded="false" />
+            <element signature="e#18137#19128#0" expanded="false" />
+            <element signature="e#19166#27146#0" expanded="false" />
+            <element signature="e#19194#20698#0" expanded="false" />
+            <element signature="e#20737#20783#0" expanded="false" />
+            <element signature="e#20821#21260#0" expanded="false" />
+            <element signature="e#21306#21317#0" expanded="false" />
+            <element signature="e#21360#21473#0" expanded="false" />
+            <element signature="e#21532#21579#0" expanded="false" />
+            <element signature="e#21636#22102#0" expanded="false" />
+            <element signature="e#22147#22151#0" expanded="false" />
+            <element signature="e#22191#22511#0" expanded="false" />
+            <element signature="e#22551#22887#0" expanded="false" />
+            <element signature="e#22921#23736#0" expanded="false" />
+            <element signature="e#23782#24155#0" expanded="false" />
+            <element signature="e#24210#24647#0" expanded="false" />
+            <element signature="e#24687#26436#0" expanded="false" />
+            <element signature="e#26475#26554#0" expanded="false" />
+            <element signature="e#26604#26748#0" expanded="false" />
+            <element signature="e#26803#27067#0" expanded="false" />
+            <element signature="e#27118#27146#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/python3.3/_markupbase.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="0" selection-start="1532" selection-end="1532" vertical-scroll-proportion="0.7816092" vertical-offset="474" max-vertical-offset="7218" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/series-manager/views/main_ui_pyside.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="66" column="0" selection-start="3376" selection-end="3376" vertical-scroll-proportion="0.0" vertical-offset="918" max-vertical-offset="1440" />
+      </provider>
+    </entry>
+    <entry file="file:///usr/lib/python3.3/html/parser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="186" column="0" selection-start="6596" selection-end="6596" vertical-scroll-proportion="0.74712646" vertical-offset="2922" max-vertical-offset="9648" />
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="0" selection-start="1164" selection-end="1164" vertical-scroll-proportion="0.72321427" vertical-offset="0" max-vertical-offset="896" />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm30/system/python_stubs/348993582/builtins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2605" column="8" selection-start="91500" selection-end="91500" vertical-scroll-proportion="0.33333334" vertical-offset="46688" max-vertical-offset="101088" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/series-manager/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="21" selection-start="851" selection-end="851" vertical-scroll-proportion="0.61803716" vertical-offset="217" max-vertical-offset="594" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/series-manager/setup_freeze.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="0" selection-start="341" selection-end="341" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="504">
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/series-manager/semard.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="556" column="0" selection-start="19129" selection-end="19129" vertical-scroll-proportion="1.2380953" vertical-offset="3186" max-vertical-offset="4032">
+          <folding>
+            <element signature="e#46#63#0" expanded="true" />
+            <element signature="e#925#952#0" expanded="false" />
+            <element signature="e#984#1363#0" expanded="false" />
+            <element signature="e#1406#1553#0" expanded="false" />
+            <element signature="e#1954#3380#0" expanded="false" />
+            <element signature="e#2051#2213#0" expanded="false" />
+            <element signature="e#2242#2346#0" expanded="false" />
+            <element signature="e#2414#3380#0" expanded="false" />
+            <element signature="e#3406#4289#0" expanded="false" />
+            <element signature="e#4258#4289#0" expanded="false" />
+            <element signature="e#4347#4387#0" expanded="false" />
+            <element signature="e#4422#4450#0" expanded="false" />
+            <element signature="e#4511#4654#0" expanded="false" />
+            <element signature="e#5746#5766#0" expanded="false" />
+            <element signature="e#5803#5822#0" expanded="false" />
+            <element signature="e#5920#6325#0" expanded="false" />
+            <element signature="e#6362#6386#0" expanded="false" />
+            <element signature="e#6434#6512#0" expanded="false" />
+            <element signature="e#6549#6559#0" expanded="false" />
+            <element signature="e#6591#7284#0" expanded="false" />
+            <element signature="e#6649#6983#0" expanded="false" />
+            <element signature="e#7018#7284#0" expanded="false" />
+            <element signature="e#7324#14733#0" expanded="false" />
+            <element signature="e#7877#8456#0" expanded="false" />
+            <element signature="e#8750#8767#0" expanded="false" />
+            <element signature="e#11455#11587#0" expanded="false" />
+            <element signature="e#11623#11667#0" expanded="false" />
+            <element signature="e#11702#12160#0" expanded="false" />
+            <element signature="e#12190#12288#0" expanded="false" />
+            <element signature="e#12337#13609#0" expanded="false" />
+            <element signature="e#13652#13731#0" expanded="false" />
+            <element signature="e#13778#14155#0" expanded="false" />
+            <element signature="e#14189#14733#0" expanded="false" />
+            <element signature="e#14792#15125#0" expanded="false" />
+            <element signature="e#18137#19128#0" expanded="false" />
+            <element signature="e#19166#27146#0" expanded="false" />
+            <element signature="e#19194#20698#0" expanded="false" />
+            <element signature="e#20737#20783#0" expanded="false" />
+            <element signature="e#20821#21260#0" expanded="false" />
+            <element signature="e#21306#21317#0" expanded="false" />
+            <element signature="e#21360#21473#0" expanded="false" />
+            <element signature="e#21532#21579#0" expanded="false" />
+            <element signature="e#21636#22102#0" expanded="false" />
+            <element signature="e#22147#22151#0" expanded="false" />
+            <element signature="e#22191#22511#0" expanded="false" />
+            <element signature="e#22551#22887#0" expanded="false" />
+            <element signature="e#22921#23736#0" expanded="false" />
+            <element signature="e#23782#24155#0" expanded="false" />
+            <element signature="e#24210#24647#0" expanded="false" />
+            <element signature="e#24687#26436#0" expanded="false" />
+            <element signature="e#26475#26554#0" expanded="false" />
+            <element signature="e#26604#26748#0" expanded="false" />
+            <element signature="e#26803#27067#0" expanded="false" />
+            <element signature="e#27118#27146#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
+

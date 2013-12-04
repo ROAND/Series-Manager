@@ -156,6 +156,13 @@
        </layout>
       </item>
       <item>
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Obs: Pode haver lentidão nas pesquisas por serem feitas em tempo real. Por favor aguarde.</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="Line" name="line">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -241,7 +248,7 @@
         <item>
          <widget class="QPushButton" name="download_button">
           <property name="text">
-           <string>&amp;Abrir Link</string>
+           <string>&amp;Download</string>
           </property>
          </widget>
         </item>
