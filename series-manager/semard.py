@@ -463,23 +463,23 @@ class Browser(QDialog):
 
     def download(self, reply):
         filepath = reply.url().toString()
-        dl = self.showBox('Iniciar download de', filepath)
-        if dl == QMessageBox.Yes:
-            split = urlparse.urlsplit(filepath)
-            filename = split.path.split("/")[-1]
-            ofd = QFileDialog()
-            ofd.setFileMode(QFileDialog.Directory)
-            ofd.setOption(QFileDialog.ShowDirsOnly)
-            res = ofd.getExistingDirectory()
-            path = os.path.join(res, filename)
-            self.start_download.emit(str(filepath), str(path))
-            #dw.start()
-        elif dl == QMessageBox.No:
-            pass
-        elif dl == QMessageBox.Cancel:
-            pass
+        #dl = self.showBox('Iniciar download de', filepath)
+        #if dl == QMessageBox.Yes:
+        split = urlparse.urlsplit(filepath)
+        filename = split.path.split("/")[-1]
+        ofd = QFileDialog()
+        ofd.setFileMode(QFileDialog.Directory)
+        ofd.setOption(QFileDialog.ShowDirsOnly)
+        ofd.setWindowTitle(filename)
+        res = ofd.getExistingDirectory()
+        path = os.path.join(res, filename)
+        self.start_download.emit(str(filepath), str(path))
+        #elif dl == QMessageBox.No:
+        #    pass
+        #elif dl == QMessageBox.Cancel:
+        #    pass
 
-        rep = self.showBox('Assistir agora?', filepath)
+        rep = self.showBox('Tentar reproduzir o arquivo?', filepath)
         if rep == QMessageBox.Yes:
             self.open_video.emit(filepath, False)
             self.close()
@@ -513,7 +513,6 @@ class Downloader(QObject):
         if os.path.exists(filename):
             file_id = open(filename, "ab")
             self.current_size = os.path.getsize(filename)
-            print(float(self.current_size))
             c.setopt(pycurl.RESUME_FROM, self.current_size)
             self.exists = True
         else:
@@ -528,14 +527,13 @@ class Downloader(QObject):
             print(er.message)
 
     def curl_progress(self, total, existing, upload_t, upload_d):
-        print(total, existing)
         try:
             if self.exists:
                 frac = ((float(existing) + float(self.current_size)) / (float(total) + float(self.current_size))) * 100
             else:
                 frac = (float(existing) / float(total)) * 100
             self.progresschanged.emit(frac, self.progressbar)
-            if frac == float(100):
+            if frac == float(100) and total != 0 and existing != 0:
                 self.finished.emit(self.progressbar, os.path.basename(self.filename))
         except:
             frac = 0
