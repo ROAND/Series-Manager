@@ -15,7 +15,7 @@ import smtplib
 from PyQt4.QtGui import QMessageBox
 import PySide
 from PySide import QtGui, QtCore
-from PySide.QtCore import Signal, Slot, QObject, QDir
+from PySide.QtCore import Signal, Slot, QObject, QDir, QThread
 from PySide.QtGui import QApplication, QMainWindow, QMessageBox, QPixmap, \
     QIcon, QMovie, QSystemTrayIcon, QMenu, \
     QDialog, QFileDialog, QInputDialog, QLineEdit
@@ -207,7 +207,7 @@ class SystemTrayIcon(QSystemTrayIcon):
             self.com.op.emit('open')
 
     def close_event(self):
-        sys.exit()
+        os._exit(-1)
 
 
 class Feedback(QDialog):
@@ -438,6 +438,9 @@ class Player(QtGui.QMainWindow):
 
 
 class Browser(QDialog):
+    start_download = Signal(str, str)
+    open_video = Signal(str, bool)
+
     def __init__(self):
         super(Browser, self).__init__()
         self.ui = Ui_BrowserWidget()
@@ -457,56 +460,20 @@ class Browser(QDialog):
         mbox.setDefaultButton(QMessageBox.Yes)
         return mbox.exec_()
 
-    def openVideo(self, filepath, duplicateMode):
-        movie = os.path.expanduser(filepath)
-        if 'http://' not in filepath:
-            if not os.access(movie, os.R_OK):
-                print('Error: %s file is not readable' % movie)
-            sys.exit(1)
-        ofd = QFileDialog()
-        ofd.setFileMode(QFileDialog.Directory)
-        ofd.setOption(QFileDialog.ShowDirsOnly)
-        res = ofd.getExistingDirectory()
-        split = urlparse.urlsplit(filepath)
-        print(split)
-        #name = QInputDialog.getText(self, 'Escolha nome do arquivo', 'Nome do arquivo:')
-        name = split.path.split("/")[-1]
-        pa = os.path.join(res, name)
-        if duplicateMode:
-            try:
-                media = instance.media_new(movie, 'sout=#duplicate{dst=file{dst=%s},dst=display}' % pa)
-            except NameError:
-                print ('NameError: % (%s vs Libvlc %s)' % (sys.exc_info()[1],
-                                                           vlc.__version__, vlc.libvlc_get_version()))
-        else:
-            try:
-                media = instance.media_new(movie)
-            except NameError:
-                print ('NameError: % (%s vs Libvlc %s)' % (sys.exc_info()[1],
-                                                           vlc.__version__, vlc.libvlc_get_version()))
-            # "--sout=#duplicate{dst=file{dst=example.mpg},dst=display}"
-
-        #player = instance.media_player_new()
-        pplayer.set_media(media)
-        self.player_window.setMedia(media)
-        self.player_window.createUI()
-        #self.player_window = Player()
-        media.parse()
-        self.player_window.setWindowTitle(media.get_meta(0))
-        self.player_window.show()
-        self.player_window.resize(640, 480)
-        pplayer.set_xwindow(self.player_window.videoframe.winId())
-        pplayer.play()
-
 
     def download(self, reply):
         filepath = reply.url().toString()
-        dl = self.showBox('Iniciar download?', filepath)
+        dl = self.showBox('Iniciar download de', filepath)
         if dl == QMessageBox.Yes:
             split = urlparse.urlsplit(filepath)
             filename = split.path.split("/")[-1]
-            dw = Downloader(str(filepath), str(filename))
-            dw.start()
+            ofd = QFileDialog()
+            ofd.setFileMode(QFileDialog.Directory)
+            ofd.setOption(QFileDialog.ShowDirsOnly)
+            res = ofd.getExistingDirectory()
+            path = os.path.join(res, filename)
+            self.start_download.emit(str(filepath), str(path))
+            #dw.start()
         elif dl == QMessageBox.No:
             pass
         elif dl == QMessageBox.Cancel:
@@ -514,7 +481,7 @@ class Browser(QDialog):
 
         rep = self.showBox('Assistir agora?', filepath)
         if rep == QMessageBox.Yes:
-            self.openVideo(filepath, False)
+            self.open_video.emit(filepath, False)
             self.close()
             main.hide()
         elif rep == QMessageBox.No:
@@ -523,14 +490,20 @@ class Browser(QDialog):
             pass
 
 
-class Downloader(Thread):
-    def __init__(self, url, filename):
-        Thread.__init__(self)
+class Downloader(QObject):
+    progresschanged = Signal(float, QtGui.QProgressBar)
+    started = Signal(str)
+    finished = Signal(QtGui.QProgressBar, str)
+
+    def __init__(self, url, filename, progressbar):
+        QObject.__init__(self)
         self.url = url
         self.filename = filename
+        self.progressbar = progressbar
 
-    def run(self):
-       self.curl_download(self.url, self.filename)
+    def download(self):
+        self.started.emit(self.filename)
+        self.curl_download(self.url, self.filename)
 
     def curl_download(self, url, filename):
         """Rate limit in bytes"""
@@ -539,21 +512,34 @@ class Downloader(Thread):
         #c.setopt(c.MAX_RECV_SPEED_LARGE, rate_limit)
         if os.path.exists(filename):
             file_id = open(filename, "ab")
-            c.setopt(pycurl.RESUME_FROM, os.path.getsize(filename))
+            self.current_size = os.path.getsize(filename)
+            print(float(self.current_size))
+            c.setopt(pycurl.RESUME_FROM, self.current_size)
+            self.exists = True
         else:
             file_id = open(filename, "wb")
-
-        c.setopt(pycurl.WRITEDATA, file_id)
-        c.setopt(pycurl.NOPROGRESS, 0)
-        c.setopt(pycurl.PROGRESSFUNCTION, self.curl_progress)
-        c.perform()
+            self.exists = False
+        try:
+            c.setopt(pycurl.WRITEDATA, file_id)
+            c.setopt(pycurl.NOPROGRESS, 0)
+            c.setopt(pycurl.PROGRESSFUNCTION, self.curl_progress)
+            c.perform()
+        except Exception as er:
+            print(er.message)
 
     def curl_progress(self, total, existing, upload_t, upload_d):
+        print(total, existing)
         try:
-            frac = float(existing) / float(total)
+            if self.exists:
+                frac = ((float(existing) + float(self.current_size)) / (float(total) + float(self.current_size))) * 100
+            else:
+                frac = (float(existing) / float(total)) * 100
+            self.progresschanged.emit(frac, self.progressbar)
+            if frac == float(100):
+                self.finished.emit(self.progressbar, os.path.basename(self.filename))
         except:
             frac = 0
-        print "Downloaded %d/%d (%0.2f%%)" % (existing, total, frac)
+            #print("Downloaded %d/%d (%0.2f%%)" % (existing, total, frac))
 
 
 class MainWindow(QMainWindow):
@@ -590,6 +576,77 @@ class MainWindow(QMainWindow):
         self.browser = None
         self.player = None
 
+    @Slot(str, bool)
+    def openVideo(self, filepath, duplicate_mode):
+        movie = os.path.expanduser(filepath)
+        if 'http://' not in filepath:
+            if not os.access(movie, os.R_OK):
+                print('Error: %s file is not readable' % movie)
+            sys.exit(1)
+
+        split = urlparse.urlsplit(filepath)
+        #name = QInputDialog.getText(self, 'Escolha nome do arquivo', 'Nome do arquivo:')
+        name = split.path.split("/")[-1]
+        #pa = os.path.join(res, name)
+        if duplicate_mode:
+            try:
+                #media = instance.media_new(movie, 'sout=#duplicate{dst=file{dst=%s},dst=display}' % pa)
+                pass
+            except NameError:
+                print ('NameError: % (%s vs Libvlc %s)' % (sys.exc_info()[1],
+                                                           vlc.__version__, vlc.libvlc_get_version()))
+        else:
+            try:
+                media = instance.media_new(movie)
+            except NameError:
+                print ('NameError: % (%s vs Libvlc %s)' % (sys.exc_info()[1],
+                                                           vlc.__version__, vlc.libvlc_get_version()))
+                # "--sout=#duplicate{dst=file{dst=example.mpg},dst=display}"
+
+        #player = instance.media_player_new()
+        pplayer.set_media(media)
+        self.player_window.setMedia(media)
+        self.player_window.createUI()
+        #self.player_window = Player()
+        media.parse()
+        self.player_window.setWindowTitle(media.get_meta(0))
+        self.player_window.show()
+        self.player_window.resize(640, 480)
+        pplayer.set_xwindow(self.player_window.videoframe.winId())
+        pplayer.play()
+
+    @Slot(str, str)
+    def start_download(self, filepath, path):
+        #thread = QThread(self)
+        pbar = QtGui.QProgressBar(self.ui.tab_downloads)
+        pbar.setMinimum(0)
+        pbar.setMaximum(100)
+        pbar.setValue(0)
+        self.ui.formLayout.addRow(os.path.basename(path), pbar)
+        pbar.show()
+        dw = Downloader(str(filepath), str(path), pbar)
+        dw.finished.connect(self.finished_download)
+        dw.progresschanged.connect(self.show_download_progress)
+        dw.started.connect(self.started_download)
+        Thread(target=dw.download).start()
+        #thread.started.connect(dw.download)
+        #thread.finished.connect(self.finished_download)
+        #dw.moveToThread(thread)
+        #thread.start()
+
+    def finished_download(self, pbar, filename):
+        self.tray.showMessage(filename, u'Download concluído.')
+        pbar.setValue(100)
+        pbar.setEnabled(False)
+
+    def started_download(self, filename):
+        filename = os.path.basename(filename)
+        self.tray.showMessage(filename, u'Download iniciado.')
+
+    @Slot(float, QtGui.QProgressBar)
+    def show_download_progress(self, progress, pbar):
+        pbar.setValue(progress)
+
     def show_feedback(self):
         feed = Feedback(self.com)
         feed.exec_()
@@ -608,7 +665,7 @@ class MainWindow(QMainWindow):
 
     def closeEvent(self, event):
         self.hide()
-        self.tray.showMessage(u'Executando', u'Semard ainda está em execução')
+        self.tray.showMessage(u'Semard', u'Semard ainda está em execução.')
         event.ignore()
 
     @Slot(str)
@@ -753,6 +810,8 @@ class MainWindow(QMainWindow):
 
     def setBrowser(self, browser_param):
         self.browser = browser_param
+        self.browser.start_download.connect(self.start_download)
+        self.browser.open_video.connect(self.openVideo)
 
 
 if __name__ == "__main__":
