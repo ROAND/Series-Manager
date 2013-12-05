@@ -277,7 +277,9 @@ class Player(QtGui.QMainWindow):
         self.mediaplayer = player
 
     def closeEvent(self, event):
+        event.ignore()
         self.exit_media()
+        self.hide()
 
     def createUI(self):
         """Set up the user interface, signals & slots
@@ -471,9 +473,10 @@ class Browser(QDialog):
         ofd.setFileMode(QFileDialog.Directory)
         ofd.setOption(QFileDialog.ShowDirsOnly)
         ofd.setWindowTitle(filename)
-        res = ofd.getExistingDirectory()
-        path = os.path.join(res, filename)
-        self.start_download.emit(str(filepath), str(path))
+        if ofd.exec_():
+            res = ofd.selectedFiles()[0]
+            path = os.path.join(res, filename)
+            self.start_download.emit(str(filepath), str(path))
         #elif dl == QMessageBox.No:
         #    pass
         #elif dl == QMessageBox.Cancel:
@@ -523,6 +526,7 @@ class Downloader(QObject):
             c.setopt(pycurl.NOPROGRESS, 0)
             c.setopt(pycurl.PROGRESSFUNCTION, self.curl_progress)
             c.perform()
+            self.finished.emit(self.progressbar, os.path.basename(self.filename))
         except Exception as er:
             print(er.message)
 
@@ -533,8 +537,8 @@ class Downloader(QObject):
             else:
                 frac = (float(existing) / float(total)) * 100
             self.progresschanged.emit(frac, self.progressbar)
-            if frac == float(100) and total != 0 and existing != 0:
-                self.finished.emit(self.progressbar, os.path.basename(self.filename))
+            #if frac == float(100) and total != 0 and existing != 0:
+            #    self.finished.emit(self.progressbar, os.path.basename(self.filename))
         except:
             frac = 0
             #print("Downloaded %d/%d (%0.2f%%)" % (existing, total, frac))
@@ -618,7 +622,7 @@ class MainWindow(QMainWindow):
         elif sys.platform == "darwin":  # for MacOS
             pplayer.set_agl(self.player_window.videoframe.windId())
         pplayer.play()
-        self.player_window.updateUI()
+        #self.player_window.updateUI()
 
     @Slot(str, str)
     def start_download(self, filepath, path):
@@ -821,10 +825,10 @@ class MainWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    main = MainWindow()
     instance = vlc.Instance()
     pplayer = instance.media_player_new()
     player_w = Player(pplayer)
+    main = MainWindow()
     browser = Browser()
     main.setBrowser(browser)
     main.show()

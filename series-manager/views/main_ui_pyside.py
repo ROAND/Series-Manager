@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main.ui'
 #
-# Created: Thu Dec  5 06:51:27 2013
+# Created: Thu Dec  5 08:27:25 2013
 #      by: pyside-uic 0.2.14 running on PySide 1.2.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -179,7 +179,7 @@ class Ui_MainWindow(object):
         self.show_button.setText(QtGui.QApplication.translate("MainWindow", "&Show Episodes", None, QtGui.QApplication.UnicodeUTF8))
         self.label_5.setText(QtGui.QApplication.translate("MainWindow", "Obs: Pode haver lentidão nas pesquisas por serem feitas em tempo real. Por favor aguarde.", None, QtGui.QApplication.UnicodeUTF8))
         self.label_4.setText(QtGui.QApplication.translate("MainWindow", "Episódios", None, QtGui.QApplication.UnicodeUTF8))
-        self.label_3.setText(QtGui.QApplication.translate("MainWindow", "Links para download:", None, QtGui.QApplication.UnicodeUTF8))
+        self.label_3.setText(QtGui.QApplication.translate("MainWindow", "Links:", None, QtGui.QApplication.UnicodeUTF8))
         self.loading_label.setText(QtGui.QApplication.translate("MainWindow", "Carregando...", None, QtGui.QApplication.UnicodeUTF8))
         self.download_button.setText(QtGui.QApplication.translate("MainWindow", "&Download", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_pesquisas), QtGui.QApplication.translate("MainWindow", "Pesquisas", None, QtGui.QApplication.UnicodeUTF8))

@@ -191,7 +191,7 @@
             <item>
              <widget class="QLabel" name="label_3">
               <property name="text">
-               <string>Links para download:</string>
+               <string>Links:</string>
               </property>
              </widget>
             </item>
