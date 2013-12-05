@@ -448,7 +448,7 @@ class Browser(QDialog):
         self.ui.webView.page().setForwardUnsupportedContent(True)
         self.ui.webView.page().unsupportedContent.connect(self.download)
         self.setWindowIcon(QIcon(get_file('animes.png')))
-        self.player_window = player_w
+        #self.player_window = player_w
 
     def showBox(self, text, infoText):
         mbox = QMessageBox()
@@ -573,6 +573,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle('Semard - Animes')
         self.browser = None
         self.player = None
+        self.player_window = player_w
 
     @Slot(str, bool)
     def openVideo(self, filepath, duplicate_mode):
@@ -610,8 +611,14 @@ class MainWindow(QMainWindow):
         self.player_window.setWindowTitle(media.get_meta(0))
         self.player_window.show()
         self.player_window.resize(640, 480)
-        pplayer.set_xwindow(self.player_window.videoframe.winId())
+        if sys.platform == "linux2":  # for Linux using the X Server
+            pplayer.set_xwindow(self.player_window.videoframe.winId())
+        elif sys.platform == "win32":  # for Windows
+            pplayer.set_hwnd(self.player_window.videoframe.winId())
+        elif sys.platform == "darwin":  # for MacOS
+            pplayer.set_agl(self.player_window.videoframe.windId())
         pplayer.play()
+        self.player_window.updateUI()
 
     @Slot(str, str)
     def start_download(self, filepath, path):
