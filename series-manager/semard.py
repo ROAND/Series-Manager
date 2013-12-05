@@ -12,7 +12,6 @@ import platform
 import webbrowser
 from email.mime.text import MIMEText
 import smtplib
-from PyQt4.QtGui import QMessageBox
 import PySide
 from PySide import QtGui, QtCore
 from PySide.QtCore import Signal, Slot, QObject, QDir, QThread
