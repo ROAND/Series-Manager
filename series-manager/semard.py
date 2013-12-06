@@ -25,7 +25,7 @@ import pycurl
 from views.main_ui_pyside import Ui_MainWindow
 from views.feedback_ui_pyside import Ui_FeedbackDialog
 from views.browser_ui_pyside import Ui_BrowserWidget
-import vlc
+#import vlc
 import user
 
 __version__ = '1.0.0'

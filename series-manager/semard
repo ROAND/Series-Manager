@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+python2 /home/ronnie/workspace/Series-Manager/series-manager/semard.py
