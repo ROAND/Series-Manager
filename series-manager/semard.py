@@ -576,7 +576,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle('Semard - Animes')
         self.browser = None
         self.player = None
-        self.player_window = player_w
+        #self.player_window = player_w
 
     @Slot(str, bool)
     def openVideo(self, filepath, duplicate_mode):
@@ -599,28 +599,29 @@ class MainWindow(QMainWindow):
                                                            vlc.__version__, vlc.libvlc_get_version()))
         else:
             try:
-                media = instance.media_new(movie)
+                #media = instance.media_new(movie)
+                subprocess.Popen(['vlc', movie])
             except NameError:
                 print ('NameError: % (%s vs Libvlc %s)' % (sys.exc_info()[1],
                                                            vlc.__version__, vlc.libvlc_get_version()))
                 # "--sout=#duplicate{dst=file{dst=example.mpg},dst=display}"
 
         #player = instance.media_player_new()
-        pplayer.set_media(media)
-        self.player_window.setMedia(media)
-        self.player_window.createUI()
+        #pplayer.set_media(media)
+        #self.player_window.setMedia(media)
+        #self.player_window.createUI()
         #self.player_window = Player()
-        media.parse()
-        self.player_window.setWindowTitle(media.get_meta(0))
-        self.player_window.show()
-        self.player_window.resize(640, 480)
-        if sys.platform == "linux2":  # for Linux using the X Server
-            pplayer.set_xwindow(self.player_window.videoframe.winId())
-        elif sys.platform == "win32":  # for Windows
-            pplayer.set_hwnd(self.player_window.videoframe.winId())
-        elif sys.platform == "darwin":  # for MacOS
-            pplayer.set_agl(self.player_window.videoframe.windId())
-        pplayer.play()
+        #media.parse()
+        #self.player_window.setWindowTitle(media.get_meta(0))
+        #self.player_window.show()
+        #self.player_window.resize(640, 480)
+        #if sys.platform == "linux2":  # for Linux using the X Server
+        #    pplayer.set_xwindow(self.player_window.videoframe.winId())
+        #elif sys.platform == "win32":  # for Windows
+        #    pplayer.set_hwnd(self.player_window.videoframe.winId())
+        #elif sys.platform == "darwin":  # for MacOS
+        #    pplayer.set_agl(self.player_window.videoframe.windId())
+        #pplayer.play()
         #self.player_window.updateUI()
 
     @Slot(str, str)
@@ -824,9 +825,9 @@ class MainWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    instance = vlc.Instance()
-    pplayer = instance.media_player_new()
-    player_w = Player(pplayer)
+    #instance = vlc.Instance()
+    #pplayer = instance.media_player_new()
+    #player_w = Player(pplayer)
     main = MainWindow()
     browser = Browser()
     main.setBrowser(browser)
