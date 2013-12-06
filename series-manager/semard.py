@@ -604,6 +604,7 @@ class MainWindow(QMainWindow):
             except NameError:
                 print ('NameError: % (%s vs Libvlc %s)' % (sys.exc_info()[1],
                                                            vlc.__version__, vlc.libvlc_get_version()))
+                QMessageBox.critical(self, 'Erro','problema ao iniciar o vlc')
                 # "--sout=#duplicate{dst=file{dst=example.mpg},dst=display}"
 
         #player = instance.media_player_new()
