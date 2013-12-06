@@ -600,7 +600,10 @@ class MainWindow(QMainWindow):
         else:
             try:
                 #media = instance.media_new(movie)
-                subprocess.Popen(['vlc', movie])
+                if sys.platform in 'win32':
+                    subprocess.Popen([os.path.join('vlc','vlc'), movie])
+                else:
+                    subprocess.Popen(['vlc', movie])
             except NameError:
                 print ('NameError: % (%s vs Libvlc %s)' % (sys.exc_info()[1],
                                                            vlc.__version__, vlc.libvlc_get_version()))
