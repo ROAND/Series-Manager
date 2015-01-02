@@ -1,18 +1,20 @@
 import sys
 import os
 import urllib.request
+from urllib.request import Request
 import socket
 from threading import Thread
-import PySide
-from PySide.QtCore import Signal, Slot, QObject
-from PySide.QtGui import QApplication, QMainWindow, QMessageBox, QPixmap, QIcon, QFileDialog
-from views.main_ui_pyside import Ui_MainWindow
-from PySide.QtCore import Qt
+import PyQt4
+from PyQt4.QtCore import pyqtSignal as Signal, pyqtSlot as Slot, QObject
+from PyQt4.QtGui import QApplication, QMainWindow, QMessageBox, QPixmap, QIcon, QFileDialog
+from views.main_ui_pyqt4 import Ui_MainWindow
+from PyQt4.QtCore import Qt
 from bs4 import BeautifulSoup
 import bs4
 import re
 import tempfile
 import subprocess
+import shutil
 
 timeout = 10
 socket.setdefaulttimeout(timeout)
@@ -20,7 +22,8 @@ socket.setdefaulttimeout(timeout)
 
 class AnimeList():
     def __init__(self, url):
-        page = urllib.request.urlopen(url)
+        req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        page = urllib.request.urlopen(req)
         page_string = page.read().decode('utf-8')
         soup = BeautifulSoup(page_string)
         links = soup.find_all("div")
@@ -64,7 +67,8 @@ class EpisodeList(Thread):
         self.start()
 
     def run(self):
-        page = urllib.request.urlopen(self.url)
+        req = Request(self.url, headers={'User-Agent': 'Mozilla/5.0'})
+        page = urllib.request.urlopen(req)
         page_string = page.read().decode('utf-8')
         soup = BeautifulSoup(page_string)
         links = soup.find_all("div")
@@ -114,7 +118,8 @@ class DownloadOptions(Thread):
         self.start()
 
     def run(self):
-        page = urllib.request.urlopen(self.url)
+        req = Request(self.url, headers={'User-Agent': 'Mozilla/5.0'})
+        page = urllib.request.urlopen(req)
         page_string = page.read().decode('utf-8')
         soup = BeautifulSoup(page_string)
         links = soup.find_all("li", {'class': 'tor'})
@@ -194,9 +199,12 @@ class MainWindow(QMainWindow):
             if os.path.exists('images' + os.sep + file_name):
                 self.ui.image_label.setPixmap('images' + os.sep + file_name)
             else:
-                urllib.request.urlretrieve('http://www.animetake.com/images/%s' % file_name,
-                                           'images' + os.sep + file_name)
-                self.ui.image_label.setPixmap('images' + os.sep + file_name)
+                reqst = Request('http://www.animetake.com/images/%s' % file_name, headers={'User-Agent': 'Mozilla/5.0'})
+                #urllib.request.urlretrieve(reqst,
+                #                           'images' + os.sep + file_name)
+                with urllib.request.urlopen(reqst) as response, open(file_name, 'wb') as out_file:
+                    shutil.copyfileobj(response, out_file)
+                self.ui.image_label.setPixmap(QPixmap('images' + os.sep + out_file.name))
             self.options = download.get_download_options()
             for name, link in self.options.items():
                 self.ui.options_list_widget.addItem(name)
@@ -228,7 +236,7 @@ class MainWindow(QMainWindow):
         self.com.sig.emit('ended')
 
     def keyPressEvent(self, event):
-        if isinstance(event, PySide.QtGui.QKeyEvent):
+        if isinstance(event, PyQt4.QtGui.QKeyEvent):
             if event.key() == Qt.Key_Down:
                 self.ui.anime_list_widget.setCurrentRow(
                     self.ui.anime_list_widget.currentRow() + 1)

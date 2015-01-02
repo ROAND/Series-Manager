@@ -8,11 +8,11 @@ extension = ".ui"
 list_of_files = [file for file in os.listdir(
     directory) if file.lower().endswith(extension)]
 for f in list_of_files:
-    dest_name_pyside = os.path.splitext(f)[0] + '_ui_pyside.py'
+    dest_name_pyqt4 = os.path.splitext(f)[0] + '_ui_pyqt4.py'
     try:
-        commands.getoutput('pyside-uic %s > %s' % (f, dest_name_pyside))
-        print(f, 'has been compiled for pyside')
+        commands.getoutput('pyuic4 %s > %s' % (f, dest_name_pyqt4))
+        print(f, 'has been compiled for pyqt4')
     except Exception as e:
-        print('PySide')
+        print('PyQt4')
         print(e.message)
 sys.exit()

@@ -2,14 +2,15 @@ import sys
 import os
 #import urllib.request
 import urllib2
+from urllib2 import Request
 import urllib
 import socket
 from threading import Thread
-import PySide
-from PySide.QtCore import Signal, Slot, QObject
-from PySide.QtGui import QApplication, QMainWindow, QMessageBox, QPixmap, QIcon, QFileDialog
-from views.main_ui_pyside import Ui_MainWindow
-from PySide.QtCore import Qt
+import PyQt4
+from PyQt4.QtCore import pyqtSignal as Signal, pyqtSlot as Slot, QObject, QString
+from PyQt4.QtGui import QApplication, QMainWindow, QMessageBox, QPixmap, QIcon, QFileDialog
+from views.main_ui_pyqt4 import Ui_MainWindow
+from PyQt4.QtCore import Qt
 from bs4 import BeautifulSoup
 import bs4
 import re
@@ -20,7 +21,8 @@ timeout = 10
 socket.setdefaulttimeout(timeout)
 
 def open_url(url):
-    return urllib2.urlopen(url)
+    req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    return urllib2.urlopen(req)
 
 def get_file(file_name):
     if getattr(sys, 'frozen', False):
@@ -172,12 +174,12 @@ class MainWindow(QMainWindow):
         self.setWindowIcon(QIcon(get_file('animes.png')))
         Thread(target=self.load_url_items).start()
 
-    @Slot(str)
+    @Slot(QString)
     def message(self, message):
-        if message in 'ended':
+        if message in "ended":
             self.ui.loading_label.setVisible(False)
             self.repaint()
-        if message in 'started':
+        if message in "started":
             self.ui.loading_label.setVisible(True)
             self.repaint()
 
@@ -247,7 +249,7 @@ class MainWindow(QMainWindow):
         self.com.sig.emit('ended')
 
     def keyPressEvent(self, event):
-        if isinstance(event, PySide.QtGui.QKeyEvent):
+        if isinstance(event, PyQt4.QtGui.QKeyEvent):
             if event.key() == Qt.Key_Down:
                 self.ui.anime_list_widget.setCurrentRow(
                     self.ui.anime_list_widget.currentRow() + 1)
