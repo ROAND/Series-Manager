@@ -128,10 +128,10 @@ class AnimeList():
                     if isinstance(a, bs4.element.Tag):
                         anime_link = 'http://www.anbient.net' + a['href']
                         anime_name = str(a.string)
-                        print(anime_name)
+                        #print(anime_name)
                         self.animes[anime_name] = anime_link
                         self.number += 1
-        print((self.animes))
+        #print((self.animes))
         #except Exception as er:
         #    print(er.message)
 

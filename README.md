@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Semard
 ==============
 
@@ -14,3 +15,9 @@ Requirements:
 - Beautiful Soup 4.3: http://www.crummy.com/software/BeautifulSoup/
 - Python 2.7: http://www.python.org/getit/
 - PySide 1.2: https://pypi.python.org/pypi/PySide
+=======
+SeriesManager
+=============
+
+A Series Manager application.
+>>>>>>> a6d53a2afb3dac0a7c1382a9bd30adc2334c5643
