@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+﻿#!/usr/bin/env python2
 #-*- coding: utf-8 -*-
 import subprocess
 import sys
@@ -13,7 +13,7 @@ import platform
 import webbrowser
 from email.mime.text import MIMEText
 import smtplib
-import PyQt5
+from PyQt5 import *
 from PyQt5 import QtGui, QtCore
 from PyQt5.QtGui import QPixmap, QIcon, QMovie
 from PyQt5.QtCore import pyqtSignal as Signal, pyqtSlot as Slot, QObject, QDir, QThread
